@@ -34,6 +34,6 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F03 | Select how many games as command-line arg.  |  P  |   |
 | x   | F04 | end of game with three cranes | P | |
 | x   | F05 | Player keeping random dice at their turn | B (F02) | | 
-| x   | F06 | Score points: 3-of-a-kind | B (F04) | | 
+| x   | F06 | Score points: 3-of-a-kind | B (F04) | |
 | ... | ... | ... |
 
