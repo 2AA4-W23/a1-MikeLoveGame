@@ -23,7 +23,7 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
  * Status: 
    * Pending (P), Started (S), Blocked (B), Done (D)
  * Definition of Done (DoD):
-   * feature is fully functional with all possible input 
+   * feature is fully functional with all possible input and Optimized 
 
 ### Backlog 
 
