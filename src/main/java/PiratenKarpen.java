@@ -7,7 +7,7 @@ public class PiratenKarpen {
         System.out.println("I'm rolling a dice");
         Dice myDice = new Dice();
         System.out.println(myDice.roll());
-        
+
         System.out.println("That's all folks!");
     }
     

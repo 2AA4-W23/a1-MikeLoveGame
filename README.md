@@ -35,5 +35,9 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F04 | end of game with three cranes | P | |
 | x   | F05 | Player keeping random dice at their turn | B (F02) | | 
 | x   | F06 | Score points: 3-of-a-kind | B (F04) | |
+| x   | F07 | Score points: gold and diamond  | B(F04)  | | |
+| x   | F08 | Implement stretagy "Randomly roll dice until the end" for player  |P||
+| x   | F09 | Implement game with 2 players using identical stretagy  | B(F08) | | |
+| x   | F10 | Print results of the game | B(F09) ||
 | ... | ... | ... |
 
