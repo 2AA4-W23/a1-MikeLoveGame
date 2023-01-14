@@ -23,15 +23,15 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
  * Status: 
    * Pending (P), Started (S), Blocked (B), Done (D)
  * Definition of Done (DoD):
-   * feature is fully functional with all possible input and Optimized 
+   * feature is functional to its description
 
 ### Backlog 
 
 | MVP? | Id  | Feature  | Status  |  Started  | Delivered |
 | :-:  |:-:  |---       | :-:     | :-:       | :-:       |
-| x   | F01 | Roll a dice |  S | 01/01/23 |  |
-| x   | F02 | Roll eight dices  |  B (F01) |   |
-| x   | F03 | Select how many games as command-line arg.  |  P  |   |
+| x   | F01 | Roll a dice |  D | 01/01/23 |  |
+| x   | F02 | Roll eight dices  |  D |   |
+| x   | F03 | Select how many games as command-line arg.  |  D  |   |
 | x   | F04 | end of game with three cranes | P | |
 | x   | F05 | Player keeping random dice at their turn | B (F02) | | 
 | x   | F06 | Score points: 3-of-a-kind | B (F04) | |
