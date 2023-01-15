@@ -34,10 +34,10 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F03 | Select how many games as command-line arg.  |  D  |   |
 | x   | F04 | end of game with three cranes | D | |
 | x   | F05 | Player keeping random dice at their turn | D | | 
-| x   | F06 | Score points: 3-of-a-kind | B (F04) | |
-| x   | F07 | Score points: gold and diamond  | B(F04)  | | |
+| x   | F06 | Score points: 3-of-a-kind | S | |
+| x   | F07 | Score points: gold and diamond  | P  | | |
 | x   | F08 | Implement stretagy "Randomly roll dice until the end" for player  |D||
-| x   | F09 | Implement game with 2 players using identical stretagy  | B(F08) | | |
+| x   | F09 | Implement game with 2 players using identical stretagy  | P | | |
 | x   | F10 | Print results of the game | B(F09) ||
 | ... | ... | ... |
 
