@@ -1,7 +1,7 @@
 import pk.Dice;
 import pk.Faces;
 public class PiratenKarpen {
-    class Player{
+    static class Player{
         public final Dice Dices[]= new Dice[8];
         public final Faces faces[]= new Faces[Dices.length];
 
@@ -59,9 +59,17 @@ public class PiratenKarpen {
         for (Dice dice:Dices ) {
             dice= new Dice();
         }
+        Player player1=new Player();
+        Player player2=new Player();
 
         int numGames= Integer.parseInt(args[0]);
+        int gameCount=0;
 
+        while(gameCount<=numGames){
+            round(player1);
+            round(player2);
+            gameCount++;
+        }
 
 
         System.out.println("That's all folks!");
