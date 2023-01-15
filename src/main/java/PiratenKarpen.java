@@ -1,6 +1,54 @@
 import pk.Dice;
 import pk.Faces;
 public class PiratenKarpen {
+    class Player{
+        public final Dice Dices[]= new Dice[8];
+        public final Faces faces[]= new Faces[Dices.length];
+
+        public String stretagy;
+        public Player(){
+            this("dead roll");
+        }
+        public Player(String Stretagy){
+            stretagy=stretagy;
+        }
+
+        public boolean ifEndRound(){
+            switch (this.stretagy){
+                case("dead roll"):
+                    return false;
+                default:
+                    return false;
+            }
+        }
+
+    }
+    public static void round(Player player) {
+        int count = 0;
+        int skullCount = 0;
+
+        boolean endRound = false;
+
+        while (!endRound) {
+
+            for (int i = 0; i < player.Dices.length; i++) {
+                if (player.Dices[i] != null) {
+                    player.faces[i] = player.Dices[i].roll();
+                }
+                if (player.faces[i] == Faces.SKULL) {
+                    player.Dices[i] = null;
+                    skullCount++;
+                }
+            }
+            endRound=player.ifEndRound();
+
+            if (skullCount >= 3) {
+                endRound = true;
+            }
+        }
+    }
+
+
 
     public static void main(String[] args) {
         System.out.println("Welcome to Piraten Karpen Simulator!");
@@ -19,45 +67,9 @@ public class PiratenKarpen {
         System.out.println("That's all folks!");
     }
 
-    class Player{
-        public final Dice Dices[]= new Dice[8];
-        public final Faces faces[]= new Faces[Dices.length];
 
-        public String stretagy;
-        public Player(){
-            this("dead roll");
-        }
-        public Player(String Stretagy){
-            stretagy=stretagy;
-        }
+}
 
-        public void round(int numGames){
-            int count=0;
-            int skullCount=0;
-
-            boolean endgame=false;
-
-            while(!endgame && count<numGames){
-
-                for (int i = 0; i <Dices.length; i++) {
-                    if(Dices[i]!=null){
-                        faces[i]=Dices[i].roll();
-                    }
-                    if (faces[i]==Faces.SKULL){
-                        Dices[i]=null;
-                        skullCount++;
-                    }
-                }
-                if(skullCount>=3){
-                    endgame=true;
-                }
-            }
-
-
-        }
-
-
-    }
 
     
-}
+
