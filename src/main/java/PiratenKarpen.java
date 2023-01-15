@@ -75,8 +75,16 @@ public class PiratenKarpen {
                     case 5:
                         score[0]+=Rules.get("5 of a kind");
                         break;
-
+                    case 6:
+                        score[0]+=Rules.get("6 of a kind");
+                        break;
+                    case 7:
+                        score[0]+=Rules.get("7 of a kind");
+                        break;
+                    default:
+                        break;
                 }
+
                 });
 
     }
