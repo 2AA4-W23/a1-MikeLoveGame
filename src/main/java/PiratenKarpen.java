@@ -1,5 +1,7 @@
 import pk.Dice;
 import pk.Faces;
+import java.util.Hashtable;
+import java.util.Map;
 public class PiratenKarpen {
     static class Player{
         public final Dice Dices[]= new Dice[8];
@@ -48,7 +50,18 @@ public class PiratenKarpen {
         }
     }
 
+    public static int score(Dice dices[]){
+        Hashtable<Integer, String> Rules= new Hashtable(Map.of("3 of a kind",100, "4 of a kind", 200, "5 of a kind",
+                500 ,"6 of a kind", 1000, "7 of a kind", 2000, "8 of a kind", 4000, "Diamond", 100, "Gold", 100));
+        int identicalCount=0;
+        Hashtable<Integer, Dice> faceList=new Hashtable();
 
+        for (Dice dice:dices) {
+
+        }
+
+
+    }
 
     public static void main(String[] args) {
         System.out.println("Welcome to Piraten Karpen Simulator!");
