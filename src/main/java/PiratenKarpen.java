@@ -7,6 +7,7 @@ public class PiratenKarpen {
         public final Dice Dices[]= new Dice[8];
         public final Faces faces[]= new Faces[Dices.length];
 
+        public int score=0;
         public String stretagy;
         public Player(){
             this("dead roll");
@@ -45,6 +46,9 @@ public class PiratenKarpen {
 
             if (skullCount >= 3) {
                 endRound = true;
+            }
+            else{
+                player.score=score(player.faces);
             }
         }
     }
@@ -114,13 +118,29 @@ public class PiratenKarpen {
 
         int gameCount=0;
 
-        while(gameCount<=numGames){
+        int player1Wins=0;
+        int player2Wins=0;
+        int draw=0;
+
+        while(gameCount<numGames){
             round(player1);
             round(player2);
+            if(player1.score>player2.score){
+                player1Wins++;
+            }
+            else if (player2.score>player1.score){
+                player2Wins++;
+            }
+            else{
+                draw++;
+            }
+
             gameCount++;
         }
 
-
+        System.out.printf("player1 Wins%d\n", player1Wins);
+        System.out.printf("player2 Wins%d\n", player2Wins);
+        System.out.printf("draws: %d\n", draw);
         System.out.println("That's all folks!");
     }
 

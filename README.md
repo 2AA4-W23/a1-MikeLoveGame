@@ -37,8 +37,8 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F06 | Score points: 3-of-a-kind | D | |
 | x   | F07 | Score points: gold and diamond  | D  | | |
 | x   | F08 | Implement stretagy "Randomly roll dice until the end" for player  |D||
-| x   | F09 | Implement game with 2 players using identical stretagy  | P | | |
-| x   | F10 | Print results of the game | B(F09) ||
-| x   | F11 | Always play 42 games without command-line arg | D ||
+| x   | F09 | Implement game with 2 players using identical stretagy  | S | | |
+| x   | F10 | Print results of the game | S ||
+| x   | F11 | Always play 42 games without command-line arg | S ||
 | ... | ... | ... |
 
