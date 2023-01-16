@@ -33,6 +33,7 @@ public class PiratenKarpen {
 
         while (!endRound) {
 
+            System.out.println(player.Dices.length);
             for (int i = 0; i < player.Dices.length; i++) {
                 if (player.Dices[i] != null) {
                     player.faces[i] = player.Dices[i].roll();
@@ -40,10 +41,11 @@ public class PiratenKarpen {
                 if (player.faces[i] == Faces.SKULL) {
                     player.Dices[i] = null;
                     skullCount++;
+
+                    System.out.println(skullCount);
                 }
             }
             endRound=player.ifEndRound();
-
             if (skullCount >= 3) {
                 endRound = true;
             }
