@@ -40,5 +40,6 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F09 | Implement game with 2 players using identical stretagy  | S | | |
 | x   | F10 | Print results of the game | S ||
 | x   | F11 | Always play 42 games without command-line arg | S ||
+| x   | F12 | Implement score system from 3 of a kind to 7 of a kind | D ||
 | ... | ... | ... |
 

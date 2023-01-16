@@ -92,7 +92,6 @@ public class PiratenKarpen {
                 }
 
                 });
-
         return score[0];
     }
 
