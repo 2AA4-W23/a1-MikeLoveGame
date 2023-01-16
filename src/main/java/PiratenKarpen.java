@@ -150,10 +150,13 @@ public class PiratenKarpen {
 
             gameCount++;
         }
+        double player1Winrate=player1Wins/(double)numGames*100;
+        double player2Winrate=player2Wins/(double)numGames*100;
+        double drawrate=draw/(double)numGames*100;
 
-        System.out.printf("player1 Wins%d\n", player1Wins);
-        System.out.printf("player2 Wins%d\n", player2Wins);
-        System.out.printf("draws: %d\n", draw);
+        System.out.printf("player1 Wins %5.2f %%\n", player1Winrate);
+        System.out.printf("player2 Wins %5.2f %%\n", player2Winrate);
+        System.out.printf("draws: %5.2f %%\n",drawrate);
         System.out.println("That's all folks!");
     }
 
