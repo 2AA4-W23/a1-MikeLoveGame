@@ -29,17 +29,17 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 
 | MVP? | Id  | Feature  | Status  |  Started  | Delivered |
 | :-:  |:-:  |---       | :-:     | :-:       | :-:       |
-| x   | F01 | Roll a dice |  D | 01/01/23 |  |
-| x   | F02 | Roll eight dices  |  D |   |
-| x   | F03 | Select how many games as command-line arg.  |  D  |   |
-| x   | F04 | end of game with three cranes | D | |
-| x   | F05 | Player keeping random dice at their turn | D | | 
-| x   | F06 | Score points: 3-of-a-kind | D | |
-| x   | F07 | Score points: gold and diamond  | D  | | |
-| x   | F08 | Implement stretagy "Randomly roll dice until the end" for player  |D||
-| x   | F09 | Implement game with 2 players using identical stretagy  | D | | |
-| x   | F10 | Print results of the game | D ||
-| x   | F11 | Always play 42 games without command-line arg | D ||
-| x   | F12 | Implement score system from 3 of a kind to 7 of a kind | D ||
+| x   | F01 | Roll a dice |  D | 01/01/13| 01/01/13 |
+| x   | F02 | Roll eight dices  |  D | 01/01/13| 01/01/13 |
+| x   | F03 | Select how many games as command-line arg.  |  D  | 01/01/13| 01/01/13 |
+| x   | F04 | end of game with three cranes | D | 01/01/14| 01/01/14 |
+| x   | F05 | Player keeping random dice at their turn | D | 01/01/14| 01/01/14 |
+| x   | F06 | Score points: 3-of-a-kind | D | 01/01/14| 01/01/14 |
+| x   | F07 | Score points: gold and diamond  | D  | 01/01/15| 01/01/15 |
+| x   | F08 | Implement stretagy "Randomly roll dice until the end" for player  | 01/01/15| 01/01/15 |
+| x   | F09 | Implement game with 2 players using identical stretagy  | D| 01/01/15| 01/01/15 |
+| x   | F10 | Print results of the game | D | 01/01/15| 01/01/15 |
+| x   | F11 | Always play 42 games without command-line arg | D | 01/01/15| 01/01/15 |
+| x   | F12 | Implement score system from 3 of a kind to 7 of a kind | D | 01/01/15| 01/01/15 |
 | ... | ... | ... |
 

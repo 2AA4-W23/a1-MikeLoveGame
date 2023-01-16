@@ -9,5 +9,7 @@ Jan 13th 2023:
 Jan 14th 2023:
     Implemented F03-F05
     Implement F06
-    Implement and done all feature from F01 to F12
+Jan 15th 2023:
+    Updated a couple features
+    Implement and done all feature from F06 to F12
     
