@@ -4,9 +4,9 @@ import java.util.*;
 public class PiratenKarpen {
 
     static class Player{
-        public final Dice Dices[]= new Dice[8];
-        public final Faces faces[]= new Faces[Dices.length];
-
+        public  Dice Dices[]= new Dice[8];
+        public  Faces faces[]= new Faces[Dices.length];
+        public int usableDice=Dices.length;
         public int score=0;
         public String stretagy;
         public Player(){
@@ -15,13 +15,18 @@ public class PiratenKarpen {
         public Player(String Stretagy){
             for (int i = 0; i < Dices.length; i++) {
                 Dices[i]= new Dice();
+                faces[i]= Dices[i].roll();
             }
             stretagy=stretagy;
         }
-
+        public int numDiceToRoll(){
+            Random r=new Random();
+            int num= r.nextInt(this.usableDice+1);
+            return (num);
+        }
         public boolean ifEndRound(){
             return false;
-        }
+        }//not implemented yet, wrote for future features
 
     }
 
@@ -33,29 +38,33 @@ public class PiratenKarpen {
 
         while (!endRound) {
 
-            for (int i = 0; i < player.Dices.length; i++) {
+            for (int i = 0; i < (player.numDiceToRoll()); ) {
                 if (player.Dices[i] != null) {
                     player.faces[i] = player.Dices[i].roll();
+                    i++;
+                    if (player.faces[i] == Faces.SKULL) {
+                        player.Dices[i] = null;
+                        skullCount++;
+                        player.usableDice--;
+                    }
                 }
-                if (player.faces[i] == Faces.SKULL) {
-                    player.Dices[i] = null;
-                    skullCount++;
-                }
-
             }
+
             endRound=player.ifEndRound();
             if (skullCount >= 3) {
                 endRound = true;
             }
+
         }
 
         //make sure give back dices
         for (int i = 0; i < player.Dices.length; i++) {
             player.Dices[i]=new Dice();
+            player.faces[i]=player.Dices[i].roll();
         }
+        player.usableDice=player.Dices.length;
 
         player.score=score(player.faces);
-        System.out.println(player.score);
     }
 
 
