@@ -36,7 +36,7 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F05 | Player keeping random dice at their turn | D | 01/01/14| 01/01/14 |
 | x   | F06 | Score points: 3-of-a-kind | D | 01/01/14| 01/01/14 |
 | x   | F07 | Score points: gold and diamond  | D  | 01/01/15| 01/01/15 |
-| x   | F08 | Implement stretagy "Randomly roll dice until the end" for player  | 01/01/15| 01/01/15 |
+| x   | F08 | Implement stretagy "Randomly roll dice until the end" for player  |D| 01/01/15| 01/01/15 |
 | x   | F09 | Implement game with 2 players using identical stretagy  | D| 01/01/15| 01/01/15 |
 | x   | F10 | Print results of the game | D | 01/01/15| 01/01/15 |
 | x   | F11 | Always play 42 games without command-line arg | D | 01/01/15| 01/01/15 |
