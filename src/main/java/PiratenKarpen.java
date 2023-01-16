@@ -1,7 +1,6 @@
 import pk.Dice;
 import pk.Faces;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 public class PiratenKarpen {
     static class Player{
         public final Dice Dices[]= new Dice[8];
@@ -49,6 +48,7 @@ public class PiratenKarpen {
             }
         }
     }
+    /*
     public static int score(Faces faces[]){
         Hashtable<String, Integer> Rules= new Hashtable(Map.of("3 of a kind",100, "4 of a kind", 200, "5 of a kind",
                 500 ,"6 of a kind", 1000, "7 of a kind", 2000, "8 of a kind", 4000, "Diamond", 100, "Gold", 100));
@@ -87,10 +87,10 @@ public class PiratenKarpen {
 
                 });
 
+        return score[0];
     }
 
-
-
+*/
     public static void main(String[] args) {
         System.out.println("Welcome to Piraten Karpen Simulator!");
         System.out.println("I'm rolling a dice");
@@ -102,8 +102,14 @@ public class PiratenKarpen {
         }
         Player player1=new Player();
         Player player2=new Player();
+        int numGames;
+        try {
+            numGames= Integer.parseInt(args[0]);
+        }
+        catch(IndexOutOfBoundsException e){
+            numGames=42;
+        }
 
-        int numGames= Integer.parseInt(args[0]);
         int gameCount=0;
 
         while(gameCount<=numGames){
