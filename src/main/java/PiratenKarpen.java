@@ -2,6 +2,7 @@ import pk.Dice;
 import pk.Faces;
 import java.util.*;
 public class PiratenKarpen {
+
     static class Player{
         public final Dice Dices[]= new Dice[8];
         public final Faces faces[]= new Faces[Dices.length];
@@ -11,21 +12,20 @@ public class PiratenKarpen {
             this("dead roll");
         }
         public Player(String Stretagy){
+            for (int i = 0; i < Dices.length; i++) {
+                Dices[i]= new Dice();
+            }
             stretagy=stretagy;
         }
 
         public boolean ifEndRound(){
-            switch (this.stretagy){
-                case("dead roll"):
-                    return false;
-                default:
-                    return false;
-            }
+            return false;
         }
 
     }
+
+
     public static void round(Player player) {
-        int count = 0;
         int skullCount = 0;
 
         boolean endRound = false;
@@ -48,7 +48,9 @@ public class PiratenKarpen {
             }
         }
     }
-    /*
+
+
+
     public static int score(Faces faces[]){
         Hashtable<String, Integer> Rules= new Hashtable(Map.of("3 of a kind",100, "4 of a kind", 200, "5 of a kind",
                 500 ,"6 of a kind", 1000, "7 of a kind", 2000, "8 of a kind", 4000, "Diamond", 100, "Gold", 100));
@@ -90,7 +92,7 @@ public class PiratenKarpen {
         return score[0];
     }
 
-*/
+
     public static void main(String[] args) {
         System.out.println("Welcome to Piraten Karpen Simulator!");
         System.out.println("I'm rolling a dice");
