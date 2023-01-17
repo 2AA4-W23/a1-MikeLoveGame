@@ -23,7 +23,7 @@ public class Game {
                     if (faces[i] == Faces.SKULL) {
                         Dices[i] = null;
                         skullCount++;
-                        player.setUsableDice();
+                        player.setUsableDice(player.getUsableDice()-1);
                     }
                 }
             }
@@ -40,7 +40,7 @@ public class Game {
             Dices[i]=new Dice();
             faces[i]=Dices[i].roll();
         }
-        usableDice=Dices.length;
+        player.setUsableDice(Dices.length);
 
         player.setScore(score(faces));
     }

@@ -52,12 +52,8 @@ public class Player {
     public void setUsableDice(int usableDice){
         this.usableDice = usableDice;
     }
-    public void deleteOneDice(){
 
-    }
-    public void restoreDices(){
 
-    }
     public void setScore(int score){
         this.score = score;
     }
