@@ -1,34 +1,8 @@
-import pk.Dice;
-import pk.Faces;
+import pk.*;
 import java.util.*;
 public class PiratenKarpen {
 
-    static class Player{
-        public  Dice Dices[]= new Dice[8];
-        public  Faces faces[]= new Faces[Dices.length];
-        public int usableDice=Dices.length;
-        public int score=0;
-        public String stretagy;
-        public Player(){
-            this("dead roll");
-        }
-        public Player(String Stretagy){
-            for (int i = 0; i < Dices.length; i++) {
-                Dices[i]= new Dice();
-                faces[i]= Dices[i].roll();
-            }
-            stretagy=stretagy;
-        }
-        public int numDiceToRoll(){
-            Random r=new Random();
-            int num= r.nextInt(this.usableDice+1);
-            return (num);
-        }
-        public boolean ifEndRound(){
-            return false;
-        }//not implemented yet, wrote for future features
 
-    }
 
 
     public static void round(Player player) {
@@ -36,16 +10,20 @@ public class PiratenKarpen {
 
         boolean endRound = false;
 
+        Dice[] Dices= player.getDices();
+        Faces[] faces= player.getFaces();
+
         while (!endRound) {
 
             for (int i = 0; i < (player.numDiceToRoll()); ) {
-                if (player.Dices[i] != null) {
-                    player.faces[i] = player.Dices[i].roll();
+
+                if (Dices[i] != null) {
+                    faces[i] = Dices[i].roll();
                     i++;
-                    if (player.faces[i] == Faces.SKULL) {
-                        player.Dices[i] = null;
+                    if (faces[i] == Faces.SKULL) {
+                        Dices[i] = null;
                         skullCount++;
-                        player.usableDice--;
+                        player.setUsableDice();
                     }
                 }
             }
@@ -58,13 +36,13 @@ public class PiratenKarpen {
         }
 
         //make sure give back dices
-        for (int i = 0; i < player.Dices.length; i++) {
-            player.Dices[i]=new Dice();
-            player.faces[i]=player.Dices[i].roll();
+        for (int i = 0; i < Dices.length; i++) {
+            Dices[i]=new Dice();
+            faces[i]=Dices[i].roll();
         }
-        player.usableDice=player.Dices.length;
+        usableDice=Dices.length;
 
-        player.score=score(player.faces);
+        player.setScore(score(faces));
     }
 
 
@@ -138,10 +116,10 @@ public class PiratenKarpen {
         while(gameCount<numGames){
             round(player1);
             round(player2);
-            if(player1.score>player2.score){
+            if(player1.getScore()>player2.getScore()){
                 player1Wins++;
             }
-            else if (player2.score>player1.score){
+            else if (player2.getScore()>player1.getScore()){
                 player2Wins++;
             }
             else{
