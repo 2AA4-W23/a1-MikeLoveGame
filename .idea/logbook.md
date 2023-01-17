@@ -17,5 +17,7 @@ Jan 16th 2023
 Jan 17th 2023
     created Player Object
     add accessor and mutator in Player Object
+    Change features into package pk
+    Optimizing logics in Player and round
     
     
