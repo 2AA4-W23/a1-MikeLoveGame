@@ -14,5 +14,7 @@ Jan 15th 2023:
     Implement and done all feature from F06 to F12
 Jan 16th 2023
     reformat output of game result in percentage
+Jan 17th 2023
+    created Player Object
     
     
