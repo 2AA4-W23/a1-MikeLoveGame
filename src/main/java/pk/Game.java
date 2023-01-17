@@ -10,23 +10,13 @@ public class Game {
 
         boolean endRound = false;
 
-        Dice[] Dices= player.getDices();
         Faces[] faces= player.getFaces();
 
         while (!endRound) {
 
-            for (int i = 0; i < (player.numDiceToRoll()); ) {
+            player.rollDice();
+            faces=player.getFaces();
 
-                if (Dices[i] != null) {
-                    faces[i] = Dices[i].roll();
-                    i++;
-                    if (faces[i] == Faces.SKULL) {
-                        Dices[i] = null;
-                        skullCount++;
-                        player.setUsableDice(player.getUsableDice()-1);
-                    }
-                }
-            }
 
             endRound=player.ifEndRound();
             if (skullCount >= 3) {

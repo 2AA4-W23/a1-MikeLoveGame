@@ -19,5 +19,6 @@ Jan 17th 2023
     add accessor and mutator in Player Object
     Change features into package pk
     Optimizing logics in Player and round
+    implement roll method in Player
     
     
