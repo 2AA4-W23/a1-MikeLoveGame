@@ -55,7 +55,6 @@ public class Player {
     public void deleteUsableDice(){
 
     }
-
     public void setScore(int score){
         this.score = score;
     }

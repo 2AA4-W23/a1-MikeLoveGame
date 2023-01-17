@@ -16,5 +16,6 @@ Jan 16th 2023
     reformat output of game result in percentage
 Jan 17th 2023
     created Player Object
+    add accessor and mutator in Player Object
     
     
