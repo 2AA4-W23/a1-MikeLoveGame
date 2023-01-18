@@ -10,11 +10,6 @@ public class PiratenKarpen {
         System.out.println("Welcome to Piraten Karpen Simulator!");
         System.out.println("I'm rolling a dice");
 
-        Dice Dices[]= new Dice[8];
-        Faces faces[]= new Faces[Dices.length];
-        for (Dice dice:Dices ) {
-            dice= new Dice();
-        }
         Player player1=new Player();
         Player player2=new Player("smart");
         int numGames;
@@ -22,7 +17,7 @@ public class PiratenKarpen {
             numGames= Integer.parseInt(args[0]);
         }
         catch(IndexOutOfBoundsException e){
-            numGames=42;
+            numGames=30;
         }
 
         Player.pkGame(player1, player2, numGames);

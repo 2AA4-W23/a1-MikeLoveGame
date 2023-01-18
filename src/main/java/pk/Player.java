@@ -1,16 +1,18 @@
 package pk;
 
 import java.util.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class Player {
+
     private final Dice Dices[] = new Dice[8];
     private Faces faces[] = new Faces[Dices.length];
     private int score = 0;
-
     private int wins=0;
-
     private final String Strategy;
+    private static final Logger logger= LogManager.getLogger(Player.class.getName());
 
     public Player() {
         this("dead roll");
@@ -56,7 +58,7 @@ public class Player {
     //Mutator Methods
 
 
-    public void resetDice() {
+    public void resetDice() {// fix when Dice all roll to skull case
         for (int i = 0; i < Dices.length; i++) {
             faces[i]= Dices[i].roll();
         }
