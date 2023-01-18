@@ -22,7 +22,7 @@ public class Player {
     public Player(String Strategy) {
         for (int i = 0; i < Dices.length; i++) {
             Dices[i] = new Dice();
-            faces[i]= Faces.None;
+            faces[i]= Dices[i].roll();
         }
         this.Strategy = Strategy;
     }
@@ -60,7 +60,9 @@ public class Player {
 
 
     public void resetDice() {
-        Arrays.fill(faces, Faces.None);
+        for (int i = 0; i < Dices.length; i++) {
+            faces[i]= Dices[i].roll();
+        }
     }
 
     public void addScore(int score) {
@@ -69,6 +71,10 @@ public class Player {
 
     public void deduceScore(int score){
         this.score -= score;
+    }
+
+    public void resetScore(){
+        score=0;
     }
     public void addwin(){
         this.wins++;
@@ -120,7 +126,8 @@ public class Player {
                 player2.addwin();
                 System.out.println(1);
             }
-
+            player1.resetScore();
+            player2.resetScore();
             gameCount++;
         }
     }
@@ -132,11 +139,9 @@ public class Player {
         boolean endRound = false;
 
         Faces[] faces;
-        faces=player.getFaces();;
 
         while (!endRound) {
             player.rollDice();
-            faces=player.getFaces();
 
             endRound=player.ifEndRound();
 
@@ -146,7 +151,8 @@ public class Player {
                 endRound=true;
             }
         }
-        int score=score(faces);
+        int score=score(player.getFaces());
+
         player.addScore(score);
         //make sure give back dices
         player.resetDice();
@@ -162,7 +168,7 @@ public class Player {
         Hashtable<Faces, Integer> faceList=new Hashtable();
 
         for (Faces face: faces) {
-            if(face==Faces.None){ //none don't count as face, but to dodge null pointer exception
+            if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
                 continue;
             }
             if (!faceList.containsKey(face)){
@@ -193,7 +199,6 @@ public class Player {
                 default:
                     break;
             }
-
         });
         return score[0];
     }
