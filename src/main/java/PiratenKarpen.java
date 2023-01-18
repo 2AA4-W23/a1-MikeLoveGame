@@ -16,7 +16,7 @@ public class PiratenKarpen {
             dice= new Dice();
         }
         Player player1=new Player();
-        Player player2=new Player();
+        Player player2=new Player("smart");
         int numGames;
         try {
             numGames= Integer.parseInt(args[0]);

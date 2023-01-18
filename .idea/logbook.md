@@ -20,5 +20,6 @@ Jan 17th 2023
     Change features into package pk
     Optimizing logics in Player and round
     implement roll method in Player
+    Edit your pom.xml file to add a dependency to the log4j library
     
     

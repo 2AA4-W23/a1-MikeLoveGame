@@ -84,6 +84,14 @@ public class Player {
     }
 
     public boolean ifEndRound() {
+        if(Strategy.equals("dead roll")){
+            return false;
+        }
+        if(Strategy.equals("smart")){
+            if(score(faces)>=2000){
+                return true;
+            }
+        }
         return false;
     }//not implemented yet, wrote for future features
 
