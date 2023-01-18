@@ -8,7 +8,8 @@ public class Player {
     private Faces faces[] = new Faces[Dices.length];
     private int score = 0;
 
-    private int skullCount = 0;
+    private int wins=0;
+
     private final String Strategy;
 
     public Player() {
@@ -24,25 +25,22 @@ public class Player {
 
     public int numDiceToRoll() {
         Random r = new Random();
-        int count = 0;
-        for (Faces face : faces) {
-            if (face == Faces.SKULL) {
-                count++;
-            }
-        }
-        int usableDice = Dices.length - count;
-        int num = r.nextInt(usableDice + 1);
+        int usableDice=Dices.length-getSkullCount();
+
+        int num = r.nextInt(usableDice-1)+2;
         return (num);
     }
 
 
     //Accessor Methods
-
+    public int getWins(){
+        return wins;
+    }
 
     public Faces[] getFaces() {
         return this.faces;
     }
-    
+
 
     public int getScore() {
         return this.score;
@@ -52,6 +50,15 @@ public class Player {
         return this.Strategy;
     }
 
+    public int getSkullCount(){
+        int skullCount=0;
+        for (Faces face: faces) {
+            if(face==Faces.SKULL){
+                skullCount++;
+            }
+        }
+        return skullCount;
+    }
     //Mutator Methods
 
 
@@ -59,12 +66,12 @@ public class Player {
         Arrays.fill(faces, null);
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void addScore(int score) {
+        this.score += score;
     }
 
-    public void setStrategy(String strategy) {
-        this.Strategy = strategy;
+    public void deduceScore(int score){
+        this.score -= score;
     }
 
     public boolean ifEndRound() {
@@ -78,11 +85,11 @@ public class Player {
         while (i < num) {
             if (faces[i] == Faces.SKULL) {
                 continue;
-
             }
             Dices[i].roll();
             i++;
         }
+
     }
 
 }

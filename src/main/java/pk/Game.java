@@ -5,6 +5,25 @@ import java.util.Map;
 
 public class Game {
 
+    public Game(Player player1, Player player2, int numGames){
+        int gameCount=0;
+        while(gameCount<numGames){
+            Game.round(player1);
+            Game.round(player2);
+            if(player1.getScore()>player2.getScore()){
+                player1Wins++;
+            }
+            else if (player2.getScore()>player1.getScore()){
+                player2Wins++;
+            }
+            else{
+                draw++;
+            }
+
+            gameCount++;
+        }
+    }
+
     public static void round(Player player) {
         int skullCount = 0;
 
@@ -17,22 +36,17 @@ public class Game {
             player.rollDice();
             faces=player.getFaces();
 
-
             endRound=player.ifEndRound();
+            skullCount=player.getSkullCount();
             if (skullCount >= 3) {
-                endRound = true;
+                endRound=true;
             }
-
         }
 
         //make sure give back dices
-        for (int i = 0; i < Dices.length; i++) {
-            Dices[i]=new Dice();
-            faces[i]=Dices[i].roll();
-        }
-        player.setUsableDice(Dices.length);
+        player.resetDice();
 
-        player.setScore(score(faces));
+        player.addScore(score(player.getFaces()));
     }
 
 

@@ -31,21 +31,7 @@ public class PiratenKarpen {
         int player2Wins=0;
         int draw=0;
 
-        while(gameCount<numGames){
-            Game.round(player1);
-            Game.round(player2);
-            if(player1.getScore()>player2.getScore()){
-                player1Wins++;
-            }
-            else if (player2.getScore()>player1.getScore()){
-                player2Wins++;
-            }
-            else{
-                draw++;
-            }
 
-            gameCount++;
-        }
         double player1Winrate=player1Wins/(double)numGames*100;
         double player2Winrate=player2Wins/(double)numGames*100;
         double drawrate=draw/(double)numGames*100;
