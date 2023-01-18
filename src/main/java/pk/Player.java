@@ -1,9 +1,6 @@
 package pk;
 
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 
 public class Player {
@@ -116,8 +113,13 @@ public class Player {
         Random r = new Random();
         int usableDice=Dices.length-getSkullCount();
 
-        int num = r.nextInt(usableDice-2)+2;
-        return (num);
+        if (Objects.equals(Strategy, "dead roll")){
+
+            int num = r.nextInt(usableDice-2)+2;
+            return (num);
+        }
+
+        return usableDice;
     }
 
     public static void pkGame(Player player1, Player player2, int numGames){
