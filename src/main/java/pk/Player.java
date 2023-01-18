@@ -22,6 +22,7 @@ public class Player {
     public Player(String Strategy) {
         for (int i = 0; i < Dices.length; i++) {
             Dices[i] = new Dice();
+            faces[i]= Faces.None;
         }
         this.Strategy = Strategy;
     }
@@ -59,7 +60,7 @@ public class Player {
 
 
     public void resetDice() {
-        Arrays.fill(faces, null);
+        Arrays.fill(faces, Faces.None);
     }
 
     public void addScore(int score) {
@@ -101,7 +102,7 @@ public class Player {
         Random r = new Random();
         int usableDice=Dices.length-getSkullCount();
 
-        int num = r.nextInt(usableDice-1)+2;
+        int num = r.nextInt(usableDice-2)+2;
         return (num);
     }
 
@@ -113,9 +114,11 @@ public class Player {
 
             if(player1.getScore()>player2.getScore()){
                 player1.addwin();
+                System.out.println(1);
             }
             else if (player2.getScore()>player1.getScore()){
                 player2.addwin();
+                System.out.println(1);
             }
 
             gameCount++;
@@ -159,6 +162,9 @@ public class Player {
         Hashtable<Faces, Integer> faceList=new Hashtable();
 
         for (Faces face: faces) {
+            if(face==Faces.None){ //none don't count as face, but to dodge null pointer exception
+                continue;
+            }
             if (!faceList.containsKey(face)){
                 faceList.put(face,1);
             }

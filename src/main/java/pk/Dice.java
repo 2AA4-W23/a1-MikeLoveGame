@@ -8,7 +8,7 @@ public class Dice {
 
 
     public Faces roll() {
-        int howManyFaces = Faces.values().length;
+        int howManyFaces = Faces.values().length-1;
         Random bag = new Random();
         return Faces.values()[bag.nextInt(howManyFaces)];
     }
