@@ -7,14 +7,15 @@ public class Game {
 
     public Game(Player player1, Player player2, int numGames){
         int gameCount=0;
+        int draw=0;
         while(gameCount<numGames){
             Game.round(player1);
             Game.round(player2);
             if(player1.getScore()>player2.getScore()){
-                player1Wins++;
+                player1.addwin();
             }
             else if (player2.getScore()>player1.getScore()){
-                player2Wins++;
+                player2.addwin();
             }
             else{
                 draw++;

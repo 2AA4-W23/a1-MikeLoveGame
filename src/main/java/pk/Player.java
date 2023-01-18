@@ -23,13 +23,6 @@ public class Player {
         this.Strategy = Strategy;
     }
 
-    public int numDiceToRoll() {
-        Random r = new Random();
-        int usableDice=Dices.length-getSkullCount();
-
-        int num = r.nextInt(usableDice-1)+2;
-        return (num);
-    }
 
 
     //Accessor Methods
@@ -73,6 +66,12 @@ public class Player {
     public void deduceScore(int score){
         this.score -= score;
     }
+    public void addwin(){
+        this.wins++;
+    }
+    public void clearWins(){
+        this.wins=0;
+    }
 
     public boolean ifEndRound() {
         return false;
@@ -91,5 +90,15 @@ public class Player {
         }
 
     }
+
+    public int numDiceToRoll() {
+        Random r = new Random();
+        int usableDice=Dices.length-getSkullCount();
+
+        int num = r.nextInt(usableDice-1)+2;
+        return (num);
+    }
+
+
 
 }
