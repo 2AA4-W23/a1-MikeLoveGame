@@ -128,11 +128,9 @@ public class Player {
 
             if(player1.getScore()>player2.getScore()){
                 player1.addwin();
-                System.out.println(1);
             }
             else if (player2.getScore()>player1.getScore()){
                 player2.addwin();
-                System.out.println(1);
             }
             player1.resetScore();
             player2.resetScore();
