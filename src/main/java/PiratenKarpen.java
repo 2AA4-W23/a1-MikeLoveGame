@@ -6,7 +6,7 @@ public class PiratenKarpen {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         System.out.println("Welcome to Piraten Karpen Simulator!");
         System.out.println("I'm rolling a dice");
 
@@ -25,11 +25,11 @@ public class PiratenKarpen {
             numGames=42;
         }
 
-        int gameCount=0;
+        Player.pkGame(player1, player2, numGames);
 
-        int player1Wins=0;
-        int player2Wins=0;
-        int draw=0;
+        int player1Wins=player1.getWins();
+        int player2Wins=player2.getWins();
+        int draw=numGames-player1Wins-player2Wins;
 
 
         double player1Winrate=player1Wins/(double)numGames*100;

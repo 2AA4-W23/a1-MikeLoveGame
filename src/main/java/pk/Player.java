@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Random;
 
+
 public class Player {
     private final Dice Dices[] = new Dice[8];
     private Faces faces[] = new Faces[Dices.length];
@@ -81,14 +82,17 @@ public class Player {
 
     public void rollDice() {
         int num = numDiceToRoll();
+        int count=0;
         int i = 0;
 
-        while (i < num) {
-            if (faces[i] == Faces.SKULL) {
-                continue;
+        while (count < num) {
+
+            if (faces[i] != Faces.SKULL) {
+                faces[i]=Dices[i].roll();
+                count++;
             }
-            Dices[i].roll();
             i++;
+
         }
 
     }
@@ -101,11 +105,12 @@ public class Player {
         return (num);
     }
 
-    public static void Game(Player player1, Player player2, int numGames){
+    public static void pkGame(Player player1, Player player2, int numGames){
         int gameCount=0;
         while(gameCount<numGames){
             round(player1);
             round(player2);
+
             if(player1.getScore()>player2.getScore()){
                 player1.addwin();
             }
@@ -117,29 +122,32 @@ public class Player {
         }
     }
 
-    public static void round(Player player) {
+    public static void round(Player player)  {
+
         int skullCount = 0;
 
         boolean endRound = false;
 
-        Faces[] faces= player.getFaces();
+        Faces[] faces;
+        faces=player.getFaces();;
 
         while (!endRound) {
-
             player.rollDice();
             faces=player.getFaces();
 
             endRound=player.ifEndRound();
+
             skullCount=player.getSkullCount();
+
             if (skullCount >= 3) {
                 endRound=true;
             }
         }
-
+        int score=score(faces);
+        player.addScore(score);
         //make sure give back dices
         player.resetDice();
 
-        player.addScore(score(player.getFaces()));
     }
 
 
