@@ -16,17 +16,20 @@ public class Player {
     public static boolean traceMode=false;
     private int wins=0;
     private final String Strategy;
+
+    private final String name;
     private static final Logger logger= LogManager.getLogger(Player.class.getName());
 
-    public Player() {
-        this("dead roll");
+    public Player(String name) {
+        this(name,"dead roll");
     }
 
-    public Player(String Strategy) {
+    public Player(String name,String Strategy) {
         for (int i = 0; i < Dices.length; i++) {
             Dices[i] = new Dice();
             faces[i]= Dices[i].roll();
         }
+        this.name=name;
         this.Strategy = Strategy;
     }
 
@@ -114,11 +117,12 @@ public class Player {
             if (faces[i] != Faces.SKULL) {
                 faces[i]=Dices[i].roll();
                 count++;
+                if(traceMode){
+                    logger.log(Level.INFO, this.name+" Dice rolled:"+faces[i]);
+                }
             }
 
-            if(traceMode){
-                logger.log(Level.INFO, this.getClass().getName()+" Dice rolled:"+faces[i]);
-            }
+
 
             i++;
         }
@@ -136,7 +140,7 @@ public class Player {
         }
 
         if(traceMode){
-            logger.log( Level.INFO,"Player "+this.getClass().getName()+" decided to roll " + num+" dices");
+            logger.log( Level.INFO,"Player "+this.name+" decided to roll " + num+" dices");
         }
 
 

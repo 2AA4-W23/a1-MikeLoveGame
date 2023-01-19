@@ -14,7 +14,9 @@
   * To package the project as a turn-key artefact:
     * `mvn package`
   * To run the packaged delivery:
-    * `java -jar target/piraten-karpen-jar-with-dependencies.jar` 
+    * `java -jar target/piraten-karpen-jar-with-dependencies.jar`
+  * To run the program in trace mode:
+    * `mvn -e exec:java -Dexec.mainClass=test.Main -Dexec.args= 42`
 
 Remark: **We are assuming here you are using a _real_ shell (e.g., anything but PowerShell on Windows)**
 
@@ -41,8 +43,8 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F10 | Print results of the game | D | 01/01/15| 01/01/15 |
 | x   | F11 | Always play 42 games without command-line arg | D | 01/01/15| 01/01/15 |
 | x   | F12 | Implement score system from 3 of a kind to 7 of a kind | D | 01/01/15| 01/01/15 |
-| x   | F13 | Create Player as a seperate Object | S | 01/01/17| 01/01/17 |
-| x   | F14 | Implement full score system| S | 01/01/15| 01/01/15 |
-| x   | F15 | Al | S | 01/01/15| 01/01/15 |
+| x   | F13 | Create Player as a seperate Object | D | 01/01/17| 01/01/17 |
+| x   | F14 | Implement full score system| D | 01/01/15| 01/01/15 |
+| x   | F15 | Implement full trace mode with Log4J | D | 01/01/17| 01/01/19 |
 | ... | ... | ... |
 

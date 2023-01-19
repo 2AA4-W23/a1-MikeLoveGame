@@ -6,12 +6,12 @@ public class PiratenKarpen {
 
 
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args){
         System.out.println("Welcome to Piraten Karpen Simulator!");
         System.out.println("I'm rolling a dice");
 
-        Player player1=new Player();
-        Player player2=new Player("smart");
+        Player player1=new Player("player1");
+        Player player2=new Player("player2","smart");
         int numGames;
         try {
             numGames= Integer.parseInt(args[0]);
@@ -19,6 +19,7 @@ public class PiratenKarpen {
         catch(IndexOutOfBoundsException e){
             numGames=30;
         }
+
         boolean traceMode=false;
         try {
             traceMode= Boolean.getBoolean(args[1]);
