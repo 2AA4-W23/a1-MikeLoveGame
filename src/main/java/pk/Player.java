@@ -42,7 +42,6 @@ public class Player {
         for (int i = 0; i < faces.length; i++) {
             facescp[i]=faces[i];
         }
-
         return facescp;
     }
 
@@ -116,12 +115,12 @@ public class Player {
                 faces[i]=Dices[i].roll();
                 count++;
             }
-            i++;
 
             if(traceMode){
                 logger.log(Level.INFO, this.getClass().getName()+" Dice rolled:"+faces[i]);
             }
 
+            i++;
         }
 
     }

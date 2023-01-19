@@ -24,7 +24,7 @@ public class PiratenKarpen {
             traceMode= Boolean.getBoolean(args[1]);
         }
         catch(Exception e){
-            traceMode=false;
+            traceMode=true;
         }
 
 
