@@ -12,6 +12,8 @@ public class PiratenKarpen {
 
         Player player1=new Player("player1");
         Player player2=new Player("player2","smart");
+        Player[] players={player1, player2};
+
         int numGames;
         try {
             numGames= Integer.parseInt(args[0]);
@@ -28,7 +30,7 @@ public class PiratenKarpen {
             traceMode=true;
         }
 
-        Player.pkGame(player1, player2, numGames, traceMode);
+        Player.pkGame(players, numGames, traceMode);
 
         int player1Wins=player1.getWins();
         int player2Wins=player2.getWins();

@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
+
 public class Player {
 
     private final Dice Dices[] = new Dice[8];
@@ -141,31 +142,33 @@ public class Player {
         if(traceMode){
             logger.log( Level.INFO,"Player "+this.name+" decided to roll " + num+" dices");
         }
-
-
         return num;
     }
 
-    public static void pkGame(Player player1, Player player2, int numGames, boolean traceMode){
+    public static boolean winner(Player player){
+        if(player.score>=6000){
+            player.addwin();
+            return true;
+        }
+        return false;
+    }
+    public static void pkGame(Player[] players, int numGames, boolean traceMode){
 
         int gameCount=0;
-
         Player.traceMode=traceMode;
 
+
         while(gameCount<numGames){
-            round(player1);
-            round(player2);
 
-            if(player1.getScore()>player2.getScore()){
-                player1.addwin();
+            for (Player player: players) {
+                round(player);
+                if(winner(player)){
+                    break;
+                }
             }
-
-            else if (player2.getScore()>player1.getScore()){
-                player2.addwin();
+            for (Player player: players) {
+                player.resetScore();
             }
-
-            player1.resetScore();
-            player2.resetScore();
             gameCount++;
         }
 
