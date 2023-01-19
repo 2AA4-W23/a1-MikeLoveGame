@@ -1,6 +1,8 @@
 package pk;
 
 import java.util.*;
+
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +12,8 @@ public class Player {
     private final Dice Dices[] = new Dice[8];
     private Faces faces[] = new Faces[Dices.length];
     private int score = 0;
+
+    public static boolean traceMode=false;
     private int wins=0;
     private final String Strategy;
     private static final Logger logger= LogManager.getLogger(Player.class.getName());
@@ -33,8 +37,13 @@ public class Player {
         return wins;
     }
 
-    public Faces[] getFaces() {
-        return this.faces;
+    public Faces[] getFaces() {//create a shallow copy
+        Faces[] facescp= new Faces[faces.length];
+        for (int i = 0; i < faces.length; i++) {
+            facescp[i]=faces[i];
+        }
+
+        return facescp;
     }
 
 
@@ -83,6 +92,7 @@ public class Player {
     }
 
     public boolean ifEndRound() {
+
         if(Strategy.equals("dead roll")){
             return false;
         }
@@ -92,6 +102,7 @@ public class Player {
             }
         }
         return false;
+
     }//not implemented yet, wrote for future features
 
     public void rollDice() {
@@ -107,6 +118,10 @@ public class Player {
             }
             i++;
 
+            if(traceMode){
+                logger.log(Level.INFO, this.getClass().getName()+" Dice rolled:"+faces[i]);
+            }
+
         }
 
     }
@@ -115,17 +130,26 @@ public class Player {
         Random r = new Random();
         int usableDice=Dices.length-getSkullCount();
 
-        if (Objects.equals(Strategy, "dead roll")){
+        int num=usableDice;
 
-            int num = r.nextInt(usableDice-2)+2;
-            return (num);
+        if (Objects.equals(Strategy, "dead roll")){
+            num = r.nextInt(usableDice-2)+2;
         }
 
-        return usableDice;
+        if(traceMode){
+            logger.log( Level.INFO,"Player "+this.getClass().getName()+" decided to roll " + num+" dices");
+        }
+
+
+        return num;
     }
 
-    public static void pkGame(Player player1, Player player2, int numGames){
+    public static void pkGame(Player player1, Player player2, int numGames, boolean traceMode){
+
         int gameCount=0;
+
+        Player.traceMode=traceMode;
+
         while(gameCount<numGames){
             round(player1);
             round(player2);
@@ -133,13 +157,16 @@ public class Player {
             if(player1.getScore()>player2.getScore()){
                 player1.addwin();
             }
+
             else if (player2.getScore()>player1.getScore()){
                 player2.addwin();
             }
+
             player1.resetScore();
             player2.resetScore();
             gameCount++;
         }
+
     }
 
     public static void round(Player player)  {

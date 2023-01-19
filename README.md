@@ -42,5 +42,7 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F11 | Always play 42 games without command-line arg | D | 01/01/15| 01/01/15 |
 | x   | F12 | Implement score system from 3 of a kind to 7 of a kind | D | 01/01/15| 01/01/15 |
 | x   | F13 | Create Player as a seperate Object | S | 01/01/17| 01/01/17 |
+| x   | F14 | Implement full score system| S | 01/01/15| 01/01/15 |
+| x   | F15 | Al | S | 01/01/15| 01/01/15 |
 | ... | ... | ... |
 

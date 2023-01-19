@@ -19,8 +19,16 @@ public class PiratenKarpen {
         catch(IndexOutOfBoundsException e){
             numGames=30;
         }
+        boolean traceMode=false;
+        try {
+            traceMode= Boolean.getBoolean(args[1]);
+        }
+        catch(Exception e){
+            traceMode=false;
+        }
 
-        Player.pkGame(player1, player2, numGames);
+
+        Player.pkGame(player1, player2, numGames, traceMode);
 
         int player1Wins=player1.getWins();
         int player2Wins=player2.getWins();
