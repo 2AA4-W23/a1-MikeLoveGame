@@ -14,5 +14,21 @@ Jan 15th 2023:
     Implement and done all feature from F06 to F12
 Jan 16th 2023
     reformat output of game result in percentage
+Jan 17th 2023
+    created Player Object
+    add accessor and mutator in Player Object
+    Change features into package pk
+    Optimizing logics in Player and round
+    implement roll method in Player
+    Edit your pom.xml file to add a dependency to the log4j library
+    
+Jan 19th 2023
+    Fully implemented Log4J with trace mode
+    The trace mode can trace player's decision for potential bugs 
+    the configuration.xml is the configuration for custom set up run 
+    in intelliJ. 
+
+    
+    
     
     
