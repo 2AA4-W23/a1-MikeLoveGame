@@ -16,7 +16,6 @@ public class Player {
     public static boolean traceMode=false;
     private int wins=0;
     private final String Strategy;
-
     private final String name;
     private static final Logger logger= LogManager.getLogger(Player.class.getName());
 

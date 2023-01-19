@@ -28,8 +28,6 @@ public class PiratenKarpen {
             traceMode=true;
         }
 
-        System.out.println(traceMode);
-        System.out.println(numGames);
         Player.pkGame(player1, player2, numGames, traceMode);
 
         int player1Wins=player1.getWins();
