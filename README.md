@@ -16,7 +16,7 @@
   * To run the packaged delivery:
     * `java -jar target/piraten-karpen-jar-with-dependencies.jar`
   * To run the program in trace mode:
-    * `mvn -e exec:java -Dexec.mainClass=test.Main -Dexec.args= 42`
+    * `mvn -e exec:java -Dexec.mainClass=test.Main -Dexec.args= "'42' 'true'"`
 
 Remark: **We are assuming here you are using a _real_ shell (e.g., anything but PowerShell on Windows)**
 

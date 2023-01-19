@@ -22,13 +22,14 @@ public class PiratenKarpen {
 
         boolean traceMode=false;
         try {
-            traceMode= Boolean.getBoolean(args[1]);
+            traceMode= Boolean.parseBoolean(args[1]);
         }
         catch(Exception e){
             traceMode=true;
         }
 
-
+        System.out.println(traceMode);
+        System.out.println(numGames);
         Player.pkGame(player1, player2, numGames, traceMode);
 
         int player1Wins=player1.getWins();
