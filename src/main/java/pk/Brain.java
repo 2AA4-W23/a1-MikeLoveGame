@@ -18,7 +18,7 @@ public class Brain {
     }
 
     public boolean ifendGame(){
-        if(stretagy.equals("smart")){
+        if(stretagy.equals("smart")){ //problems to fix
             int score=pkGame.score(player.getFaces());
             if(pkGame.winner(player)){
                 return true;
