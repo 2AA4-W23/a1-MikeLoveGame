@@ -1,5 +1,5 @@
 package pk;
-
+import java.util.*;
 public class Brain {
     private final String stretagy;
     private final Player player;
@@ -13,7 +13,7 @@ public class Brain {
     }
     public int numDiceToRoll(int UsableDice){
 
-        return
+        return 
     }
 
     public boolean ifendGame(){
