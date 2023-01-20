@@ -11,9 +11,10 @@ public class Brain {
     public String getStrategy(){
         return this.stretagy;
     }
-    public int numDiceToRoll(int UsableDice){
+    public int numDiceToRoll(int usableDice){
+        Random r= new Random();
 
-        return 
+        return r.nextInt(usableDice-2)+2;
     }
 
     public boolean ifendGame(){
