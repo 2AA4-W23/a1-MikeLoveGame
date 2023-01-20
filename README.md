@@ -47,7 +47,7 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F14 | Create Player as a seperate Object | D | 01/01/17| 01/01/17 |
 | x   | F15 | Implement full score system| D | 01/01/15| 01/01/15 |
 | x   | F17 | Implement comulated 6000 point player wins otherwise continue | D | 01/01/20| 01/01/20 |
-| x   | F18 | Implement Stretagy for player | P | | |
+| x   | F18 | Implement Stretagy for player | P |  | |
 | x   | F19 | don't gain point with 3 Skull | P | | |
 | ... | ... | ... |
 
