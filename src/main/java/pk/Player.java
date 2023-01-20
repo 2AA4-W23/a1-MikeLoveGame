@@ -40,7 +40,10 @@ public class Player {
         return wins;
     }
 
-    public Faces[] getFaces() {//create a shallow copy
+    public String getName(){
+        return this.name;
+    }
+    public Faces[] getFaces() {//create a deep copy
         Faces[] facescp= new Faces[faces.length];
         for (int i = 0; i < faces.length; i++) {
             facescp[i]=faces[i];
@@ -71,7 +74,7 @@ public class Player {
 
     public void resetDice() {// fix when Dice all roll to skull case
         for (int i = 0; i < Dices.length; i++) {
-            faces[i]= Dices[i].roll();
+            do{faces[i]= Dices[i].roll();}while(Faces.SKULL==faces[i]); // if reset to a skull, do it again
         }
     }
 
@@ -122,8 +125,6 @@ public class Player {
                 }
             }
 
-
-
             i++;
         }
 
@@ -145,7 +146,7 @@ public class Player {
         return num;
     }
 
-    public static boolean winner(Player player){
+    private static boolean winner(Player player){
         if(player.score>=6000){
             player.addwin();
             return true;
@@ -159,22 +160,29 @@ public class Player {
 
 
         while(gameCount<numGames){
+            boolean endround=false;
 
             for (Player player: players) {
-                round(player);
-                if(winner(player)){
-                    break;
+                player.resetScore();
+                player.resetDice();
+            }
+
+            while(!endround) {
+                for (Player player : players) {
+                    round(player);
+                    if (winner(player)) {
+                        endround=true;
+                        break;
+                    }
                 }
             }
-            for (Player player: players) {
-                player.resetScore();
-            }
+
             gameCount++;
         }
 
     }
 
-    public static void round(Player player)  {
+    private static void round(Player player)  {
 
         int skullCount = 0;
 
@@ -191,6 +199,7 @@ public class Player {
 
             if (skullCount >= 3) {
                 endRound=true;
+                player.resetScore();
             }
         }
         int score=score(player.getFaces());
@@ -204,8 +213,12 @@ public class Player {
 
 
     public static int score(Faces faces[]){
+
+        //key is the type, value is the score to the type
+
         Hashtable<String, Integer> Rules= new Hashtable(Map.of("3 of a kind",100, "4 of a kind", 200, "5 of a kind",
                 500 ,"6 of a kind", 1000, "7 of a kind", 2000, "8 of a kind", 4000, "Diamond", 100, "Gold", 100));
+
         int score[] = new int[1];//variables in lambda must be final
         Hashtable<Faces, Integer> faceList=new Hashtable();
 

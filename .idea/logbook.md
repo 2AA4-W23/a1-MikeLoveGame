@@ -28,6 +28,8 @@ Jan 19th 2023
     the configuration.xml is the configuration for custom set up run 
     in intelliJ. 
 
+Jan 20th 2023
+    Finished implementing 6000 cumulative point wins
     
     
     
