@@ -14,7 +14,6 @@ public class Player {
     private Faces faces[] = new Faces[Dices.length];
     private final Brain brain;
     private int score = 0;
-
     public static boolean traceMode=false;
     private int wins=0;
     private final String name;
@@ -99,8 +98,8 @@ public class Player {
 
     public boolean ifEndRound() {
 
-        brain.ifendGame();
-        return false;
+
+        return brain.ifendGame();
 
     }//not implemented yet, wrote for future features
 

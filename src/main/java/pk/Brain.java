@@ -20,7 +20,7 @@ public class Brain {
     public boolean ifendGame(){
         if(stretagy.equals("smart")){ //problems to fix
             int score=pkGame.score(player.getFaces());
-            if(pkGame.winner(player)){
+            if((player.getScore()+pkGame.score(player.getFaces()))>=6000){
                 return true;
             }
         }
