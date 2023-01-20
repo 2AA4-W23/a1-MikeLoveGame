@@ -24,6 +24,15 @@ public class Brain {
                 return true;
             }
         }
+        else{
+            Random r=new Random();
+            if(r.nextInt()%2==0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
 
         return false;
     }
