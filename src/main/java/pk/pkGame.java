@@ -74,8 +74,15 @@ public class pkGame {
 
         //key is the type, value is the score to the type
 
-        Hashtable<String, Integer> Rules= new Hashtable(Map.of("3 of a kind",100, "4 of a kind", 200, "5 of a kind",
-                500 ,"6 of a kind", 1000, "7 of a kind", 2000, "8 of a kind", 4000, "Diamond", 100, "Gold", 100));
+        Hashtable<String, Integer> Rules = new Hashtable<>();
+        Rules.put("3 of a kind",100);
+        Rules.put("4 of a kind", 200);
+        Rules.put("5 of a kind",500);
+        Rules.put("6 of a kind", 1000);
+        Rules.put("7 of a kind", 2000);
+        Rules.put("8 of a kind", 4000);
+        Rules.put("Diamond", 100);
+        Rules.put("Gold", 100);
 
         int score[] = new int[1];//variables in lambda must be final
         Hashtable<Faces, Integer> faceList=new Hashtable();
@@ -84,7 +91,7 @@ public class pkGame {
             if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
                 continue;
             }
-            if (!faceList.containsKey(face)){
+            else if (!faceList.containsKey(face)){
                 faceList.put(face,1);
             }
             else{
@@ -111,6 +118,9 @@ public class pkGame {
                     break;
                 default:
                     break;
+            }
+            if(k==Faces.DIAMOND|| k==Faces.GOLD){
+                score[0]+=100*v;
             }
         });
         return score[0];

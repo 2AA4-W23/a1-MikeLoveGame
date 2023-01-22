@@ -10,8 +10,8 @@ public class PiratenKarpen {
         System.out.println("Welcome to Piraten Karpen Simulator!");
         System.out.println("I'm rolling a dice");
 
-        Player player1=new Player("player1");
-        Player player2=new Player("player2", "smart");
+        Player player1=new Player("player1","smart");
+        Player player2=new Player("player2" );
 
         Player[] players={player1, player2};
 

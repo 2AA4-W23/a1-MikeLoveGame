@@ -20,12 +20,14 @@ public class Brain {
     public boolean ifendGame(){
         if(stretagy.equals("smart")){ //problems to fix
             int score=pkGame.score(player.getFaces());
-            if((player.getScore()+pkGame.score(player.getFaces()))>=6000){
+            if(score+player.getScore()>=1000){
                 return true;
             }
         }
         else{
+
             Random r=new Random();
+
             if(r.nextInt()%2==0){
                 return true;
             }

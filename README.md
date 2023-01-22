@@ -49,5 +49,6 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F17 | Implement comulated 6000 point player wins otherwise continue | D | 01/01/20| 01/01/20 |
 | x   | F18 | Implement Stretagy for player | P |  | |
 | x   | F19 | don't gain point with 3 Skull | P | | |
+| x   | F20 | Player gets to choose which dice to keep, which dice to reroll  | P | | |
 | ... | ... | ... |
 
