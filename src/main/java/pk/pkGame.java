@@ -40,21 +40,25 @@ public class pkGame {
 
         Faces[] faces;
 
-        int score;
+        int score=0;
 
         while (!endRound) {
             player.rollDice();
 
             endRound=player.ifEndRound();
 
+            if(endRound){
+                score=score(player.getFaces());
+            }
+
             skullCount=player.getSkullCount();
 
             if (skullCount >= 3) {
                 endRound=true;
+                score=0;
             }
-
         }
-        score=score(player.getFaces());
+
 
         player.addScore(score);
         //make sure give back dices

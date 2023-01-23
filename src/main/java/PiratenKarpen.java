@@ -20,7 +20,7 @@ public class PiratenKarpen {
             numGames= Integer.parseInt(args[0]);
         }
         catch(IndexOutOfBoundsException e){
-            numGames=3;
+            numGames=10;
         }
 
         boolean traceMode=false;

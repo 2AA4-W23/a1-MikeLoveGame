@@ -47,8 +47,8 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F14 | Create Player as a seperate Object | D | 01/01/17| 01/01/17 |
 | x   | F15 | Implement full score system| D | 01/01/15| 01/01/15 |
 | x   | F17 | Implement comulated 6000 point player wins otherwise continue | D | 01/01/20| 01/01/20 |
-| x   | F18 | Implement Stretagy for player | P |  | |
-| x   | F19 | don't gain point with 3 Skull | P | | |
-| x   | F20 | Player gets to choose which dice to keep, which dice to reroll  | P | | |
+| x   | F18 | Implement Stretagy for player | D | 01/01/21 | 01/01/22 |
+| x   | F19 | don't gain point with 3 Skull | D | 01/01/22 | 01/01/22 |
+| x   | F20 | Player gets to choose which dice to keep, which dice to reroll  | D | 01/01/22 | 01/01/22 |
 | ... | ... | ... |
 
