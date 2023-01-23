@@ -1,8 +1,15 @@
 package pk;
 import java.util.*;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Brain {
     private final String stretagy;
     private final Player player;
+
+    private final Logger logger=LogManager.getLogger(Player.class.getName());
     protected Brain(Player player,String stretagy){
         this.stretagy=stretagy;
         this.player=player;
@@ -13,14 +20,13 @@ public class Brain {
     }
     public int numDiceToRoll(int usableDice){
         Random r= new Random();
-
         return r.nextInt(usableDice-2)+2;
 
     }
 
-    public int[] DicesToRoll(){
+    public Integer[] DicesToRoll(){
         Faces[] faces=facesToRoll();
-        int[] diceList=new int[8];
+        Integer[] diceList=new Integer[8];
         int index=0;
         int count=0;
 
@@ -28,13 +34,18 @@ public class Brain {
             for (Faces face2: faces) {
                 if(face1==face2){
                     diceList[count]=index;
+                    count++;
                 }
             }
             index++;
         }
+        if(count<2){
+            return null;
+        }
+        logger.log( Level.INFO,"Player "+player.getName()+" decided to roll " + count + " dices");
         return diceList;
     }
-    public Faces[] facesToRoll(){
+    private Faces[] facesToRoll(){
 
         Faces[] faces=player.getFaces();
 
@@ -65,9 +76,12 @@ public class Brain {
 
     }
 
-    public boolean ifendGame(){
+    public boolean ifEndRound(){
         if(stretagy.equals("smart")){ //problems to fix
             int score=pkGame.score(player.getFaces());
+            if(DicesToRoll()==null){
+                return true;
+            }
             if(score+player.getScore()>=1000){
                 return true;
             }

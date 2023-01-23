@@ -97,13 +97,14 @@ public class Player {
     }
 
     public boolean ifEndRound() {
-
-
-        return brain.ifendGame();
+        if(brain.ifEndRound()){
+            logger.log(Level.INFO, this.name+"decided to end round");
+        }
+        return brain.ifEndRound();
 
     }//not implemented yet, wrote for future features
 
-    public void rollDice() {
+    public void rollRandomDice() {
         int num = numDiceToRoll();
         int count=0;
         int i = 0;
@@ -117,10 +118,34 @@ public class Player {
                     logger.log(Level.INFO, this.name+" Dice rolled:"+faces[i]);
                 }
             }
-
             i++;
         }
+    }
 
+    public void smartRoll(){
+        Integer[] dicesToRoll=this.brain.DicesToRoll();
+        int i=0;
+        if(dicesToRoll==null){ //this is added because if a smart player gets a magnificent hand in the first round,
+            //it would be asked to end the game but roll the dice, then it will be asked to how many will roll, if hte answer belows 2 it has a bug to fix
+            return;
+        }
+        while(dicesToRoll[i]!=null){
+            int x=dicesToRoll[i];
+            this.faces[x]=this.Dices[x].roll();
+            if(traceMode){
+                logger.log(Level.INFO, this.name+" Dice rolled:"+faces[i]);
+            }
+            i++;
+        }
+    }
+
+    public void rollDice(){
+        if(this.brain.getStrategy()=="dead roll"){
+            this.rollRandomDice();
+        }
+        else if(this.brain.getStrategy()=="smart"){
+           this.smartRoll();
+        }
     }
 
     public int numDiceToRoll() {

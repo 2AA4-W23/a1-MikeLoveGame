@@ -52,6 +52,7 @@ public class pkGame {
             if (skullCount >= 3) {
                 endRound=true;
             }
+
         }
         score=score(player.getFaces());
 
