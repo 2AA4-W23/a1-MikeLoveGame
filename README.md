@@ -52,5 +52,6 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F18 | Implement Stretagy for player | D | 01/01/21 | 01/01/22 |
 | x   | F19 | don't gain point with 3 Skull | D | 01/01/22 | 01/01/22 |
 | x   | F20 | Player gets to choose which dice to keep, which dice to reroll  | D | 01/01/22 | 01/01/22 |
+| x   | F20 | Implemented Random player vs Combo player in command lines| D | 01/01/22 | 01/01/22 |
 | ... | ... | ... |
 
