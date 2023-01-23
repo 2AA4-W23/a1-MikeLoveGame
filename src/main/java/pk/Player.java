@@ -97,7 +97,7 @@ public class Player {
     }
 
     public boolean ifEndRound() {
-        if(brain.ifEndRound()){
+        if(brain.ifEndRound()&& traceMode==true){
             logger.log(Level.INFO, this.name+"decided to end round");
         }
         return brain.ifEndRound();
