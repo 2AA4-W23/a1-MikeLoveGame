@@ -17,7 +17,23 @@ public class Brain {
         return r.nextInt(usableDice-2)+2;
 
     }
-    
+
+    public int[] DicesToRoll(){
+        Faces[] faces=facesToRoll();
+        int[] diceList=new int[8];
+        int index=0;
+        int count=0;
+
+        for (Faces face1: player.getFaces() ) {
+            for (Faces face2: faces) {
+                if(face1==face2){
+                    diceList[count]=index;
+                }
+            }
+            index++;
+        }
+        return diceList;
+    }
     public Faces[] facesToRoll(){
 
         Faces[] faces=player.getFaces();
