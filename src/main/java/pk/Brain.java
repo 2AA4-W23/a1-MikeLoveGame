@@ -15,6 +15,38 @@ public class Brain {
         Random r= new Random();
 
         return r.nextInt(usableDice-2)+2;
+
+    }
+    
+    public Faces[] facesToRoll(){
+
+        Faces[] faces=player.getFaces();
+
+        Hashtable<Faces, Integer> faceList=new Hashtable();
+        Faces[] facesNeedRoll= new Faces[8];
+        int count=0;
+
+        for (Faces face: faces) {
+            if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
+                continue;
+            }
+            else if (!faceList.containsKey(face)){
+                faceList.put(face,1);
+            }
+            else{
+                faceList.put(face,(faceList.get(face)+1));
+            }
+        }
+
+        faceList.forEach((k,v)->{
+            if (v<3){
+                facesNeedRoll[count]=k;
+            }
+        }
+        );
+
+        return facesNeedRoll;
+
     }
 
     public boolean ifendGame(){
