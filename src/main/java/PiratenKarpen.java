@@ -2,18 +2,12 @@ import pk.*;
 import java.util.*;
 public class PiratenKarpen {
 
-
-
-
-
     public static void main(String[] args){
         System.out.println("Welcome to Piraten Karpen Simulator!");
-        System.out.println("I'm rolling a dice");
 
-        Player player1=new Player("player1","smart");
-        Player player2=new Player("player2" );
+        Player player1;
+        Player player2;
 
-        Player[] players={player1, player2};
 
         int numGames;
         try {
@@ -31,6 +25,20 @@ public class PiratenKarpen {
             traceMode=true;
         }
 
+
+        try{
+            if(args[0].equals("svd")){
+                player1=new Player("player1", "smart");
+                player2=new Player("player2");
+            }
+        }
+        catch(Exception e){
+        }
+        player1=new Player("player1");
+        player2=new Player("player2");
+
+        Player[] players={player1, player2};
+
         new pkGame(players, numGames, traceMode);
 
         int player1Wins=player1.getWins();
@@ -47,7 +55,6 @@ public class PiratenKarpen {
         System.out.printf("draws: %5.2f %%\n",drawrate);
         System.out.println("That's all folks!");
     }
-
 
 }
 

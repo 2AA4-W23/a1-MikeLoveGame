@@ -31,6 +31,13 @@ Jan 19th 2023
 Jan 20th 2023
     Finished implementing 6000 cumulative point wins
     
+Jan 22th 2023
+    Finished F18-F20
+    Minor bug happens to some specific test cases
+    Implementing different player with different stretagies using 
+    inheritance next stage
+    There logics Between Brain and Player is considered to be 
+    a technical debt
     
     
     

@@ -17,6 +17,8 @@
     * `java -jar target/piraten-karpen-jar-with-dependencies.jar`
   * To run the program in trace mode:
     * `mvn exec:java -Dexec.args="'42' 'true'"` (copy and paste to terminal, it does not work here idk why)
+  * To run with player1 with smart stretagy, player2 plays randomly
+    * mvn exec:java -Dexec.args=”svd”
 
 Remark: **We are assuming here you are using a _real_ shell (e.g., anything but PowerShell on Windows)**
 
