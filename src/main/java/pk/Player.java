@@ -22,7 +22,7 @@ public class Player {
 
     public Player(String name) {
         this(name,"dead roll");
-    }
+    } //dead roll is the default strategy for player
 
     public Player(String name,String Strategy) {
         for (int i = 0; i < Dices.length; i++) {
@@ -104,8 +104,8 @@ public class Player {
 
     }//not implemented yet, wrote for future features
 
-    public void rollRandomDice() {
-        int num = numDiceToRoll();
+    private void rollRandomDice() {
+        int num = numDiceToRoll(this);
         int count=0;
         int i = 0;
 
@@ -122,7 +122,7 @@ public class Player {
         }
     }
 
-    public void smartRoll(){
+    private void smartRoll(){
         Integer[] dicesToRoll=this.brain.DicesToRoll();
         int i=0;
         if(dicesToRoll==null){ //this is added because if a smart player gets a magnificent hand in the first round,
@@ -148,17 +148,18 @@ public class Player {
         }
     }
 
-    public int numDiceToRoll() {
+    private static int numDiceToRoll(Player player) {
         Random r = new Random();
-        int usableDice=Dices.length-getSkullCount();
+        int usableDice=player.Dices.length-player.getSkullCount();
 
         int num;
 
-        num = brain.numDiceToRoll(usableDice);
+        num = player.brain.numDiceToRoll(usableDice);
 
         if(traceMode){
-            logger.log( Level.INFO,"Player "+this.name+" decided to roll " + num+" dices");
+            logger.log( Level.INFO,"Player "+player.name+" decided to roll " + num+" dices");
         }
+
         return num;
     }
 

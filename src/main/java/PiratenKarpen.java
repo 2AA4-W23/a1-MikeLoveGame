@@ -13,29 +13,31 @@ public class PiratenKarpen {
         try {
             numGames= Integer.parseInt(args[0]);
         }
-        catch(IndexOutOfBoundsException e){
-            numGames=10;
+        catch(Exception e){
+            numGames=30;
         }
 
         boolean traceMode=false;
         try {
             traceMode= Boolean.parseBoolean(args[1]);
         }
+
         catch(Exception e){
-            traceMode=true;
+            traceMode=false;
         }
 
 
+        player1=new Player("player1");
+        player2=new Player("player2");
+
         try{
-            if(args[0].equals("svd")){
+            if("svd".equals(args[0])){
                 player1=new Player("player1", "smart");
                 player2=new Player("player2");
             }
         }
         catch(Exception e){
         }
-        player1=new Player("player1");
-        player2=new Player("player2");
 
         Player[] players={player1, player2};
 
