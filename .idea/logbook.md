@@ -38,6 +38,10 @@ Jan 22th 2023
     inheritance next stage
     There logics Between Brain and Player is considered to be 
     a technical debt
-    
+
+Jan 24th 2023
+    Paid most of the techincal debts in the last iteration
+    major bug fix and deleted redundent logics
+    Planning new features for the last iteration 
     
     
