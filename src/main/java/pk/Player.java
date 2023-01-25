@@ -22,7 +22,8 @@ public class Player {
 
     public Player(String name) {
         this(name,"dead roll");
-    } //dead roll is the default strategy for player
+    } //dead roll is the default strategy for player who
+    //does not use their brain but relies on probability
 
     public Player(String name,String Strategy) {
         for (int i = 0; i < Dices.length; i++) {
@@ -119,6 +120,7 @@ public class Player {
             }
             i++;
         }
+
     }
 
     private void smartRoll(){
@@ -133,19 +135,24 @@ public class Player {
             this.faces[x]=this.Dices[x].roll();
             i++;
         }
-
-        logger.log( Level.INFO,"Player "+this.getName()+" decided to roll " + dicesChosen+" dices\n");
+        if(traceMode) {
+            logger.log(Level.INFO, "Player " + this.getName() + " decided to roll " + dicesChosen + " dices\n");
+        }
     }
 
     public void rollDice(){
-        logger.log(Level.INFO, " before rolling the dice, "+this.getName()+" hold following faces"+ Faces.toString(faces)+"\n");
+        if(traceMode){
+            logger.log(Level.INFO, " before rolling the dice, "+this.getName()+" hold following faces"+ Faces.toString(faces)+"\n");
+        }
         if(this.brain.getStrategy()=="dead roll"){
             this.rollRandomDice();
         }
-        else if(this.brain.getStrategy()=="smart"){
+        else {
            this.smartRoll();
         }
-        logger.log(Level.INFO, " after rolling the dice, "+this.getName()+" hold following faces"+ Faces.toString(faces)+"\n");
+        if(traceMode) {
+            logger.log(Level.INFO, " after rolling the dice, " + this.getName() + " hold following faces" + Faces.toString(faces) + "\n");
+        }
     }
 
     private static int numDiceToRoll(Player player) {

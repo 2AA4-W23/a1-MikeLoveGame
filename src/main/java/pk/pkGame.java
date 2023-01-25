@@ -52,7 +52,7 @@ public class pkGame {
             player.rollDice();
             skullCount=player.getSkullCount();
             if (skullCount >= 3) {
-                logger.log(Level.INFO,player.getName()+" ended round bec 3 or more skull\n");
+                if(Player.traceMode){logger.log(Level.INFO,player.getName()+" ended round bec 3 or more skull\n");}
                 break;
             }
         }
@@ -61,7 +61,7 @@ public class pkGame {
             score=score(player.getFaces());
             player.addScore(score);
         }
-        logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");
+        if(Player.traceMode){logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");}
         //make sure give back dices
         player.resetDice();
 
@@ -80,17 +80,15 @@ public class pkGame {
 
         //key is the type, value is the score to the type
 
-        Hashtable<String, Integer> Rules = new Hashtable<>();
-        Rules.put("3 of a kind",100);
-        Rules.put("4 of a kind", 200);
-        Rules.put("5 of a kind",500);
-        Rules.put("6 of a kind", 1000);
-        Rules.put("7 of a kind", 2000);
-        Rules.put("8 of a kind", 4000);
-        Rules.put("Diamond", 100);
-        Rules.put("Gold", 100);
+        Hashtable<Integer, Integer> Rules = new Hashtable<>();
+        Rules.put(3,100);//3 of a kind
+        Rules.put(4, 200);//4 of a kind
+        Rules.put(5,500);//5 of a kind
+        Rules.put(6, 1000);//6 of a kind
+        Rules.put(7, 2000);//7 of a kind
+        Rules.put(8, 4000);//8 of a kind
 
-        int score[] = new int[1];//variables in lambda must be final
+        int score = 0;//variables in lambda must be final
         Hashtable<Faces, Integer> faceList=new Hashtable();
 
         for (Faces face: faces) {
@@ -104,32 +102,23 @@ public class pkGame {
                 faceList.put(face,(faceList.get(face)+1));
             }
         }
+        int count=0;
+        for(Faces k: faceList.keySet()){
+            int v=faceList.get(k);
+            if(v>2){
+                count+=v;
+                score+=Rules.get(v);
+            }
 
-        faceList.forEach((k,v)->{
-            switch(v) {
-                case 3:
-                    score[0]+=Rules.get("3 of a kind");
-                    break;
-                case 4:
-                    score[0]+=Rules.get("4 of a kind");
-                    break;
-                case 5:
-                    score[0]+=Rules.get("5 of a kind");
-                    break;
-                case 6:
-                    score[0]+=Rules.get("6 of a kind");
-                    break;
-                case 7:
-                    score[0]+=Rules.get("7 of a kind");
-                    break;
-                default:
-                    break;
-            }
             if(k==Faces.DIAMOND|| k==Faces.GOLD){
-                score[0]+=100*v;
+                score+=100*v;
             }
-        });
-        return score[0];
+
+        }
+        if(count==8){//full chest
+            score+=500;
+        }
+        return score;
     }
 
 }
