@@ -31,6 +31,7 @@ public class Player {
         }
         this.name=name;
         brain=new Brain(this,Strategy);
+        this.resetDice();
     }
 
 
@@ -123,16 +124,16 @@ public class Player {
     private void smartRoll(){
         Integer[] dicesToRoll=this.brain.DicesToRoll();
         int i=0;
-        if(dicesToRoll==null){ //this is added because if a smart player gets a magnificent hand in the first round,
-            //it would be asked to end the game but roll the dice,
-            // then it will be asked to how many will roll, if hte answer belows 2 it has a bug to fix
-            return;
-        }
-        while(i<dicesToRoll.length && dicesToRoll[i]!=null ){
-            int x=dicesToRoll[i];
+
+        while(i<dicesToRoll.length && dicesToRoll[i]!=null){
+            int x;
+            x=dicesToRoll[i];
+
             this.faces[x]=this.Dices[x].roll();
             i++;
         }
+
+        logger.log( Level.INFO,"Player "+this.getName()+" decided to roll " + i + " dices\n");
     }
 
     public void rollDice(){

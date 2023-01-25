@@ -21,7 +21,6 @@ public class pkGame {
 
             for (Player player: players) {
                 player.resetScore();
-                player.resetDice();
             }
 
             while(!endround) {
@@ -49,27 +48,19 @@ public class pkGame {
 
         int score=0;
 
-        while (!endRound) {
+        while (!player.ifEndRound()) {
             player.rollDice();
-
-            endRound=player.ifEndRound();
-
-            if(endRound){
-                score=score(player.getFaces());
-            }
-
             skullCount=player.getSkullCount();
-
             if (skullCount >= 3) {
                 logger.log(Level.INFO,player.getName()+" ended round bec 3 or more skull\n");
-                endRound=true;
-                score=0;
+                break;
             }
         }
 
-
-        player.addScore(score);
-
+        if (player.getSkullCount() < 3) {
+            score=score(player.getFaces());
+            player.addScore(score);
+        }
         logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");
         //make sure give back dices
         player.resetDice();

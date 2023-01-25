@@ -23,7 +23,6 @@ public class Brain {
         return r.nextInt(usableDice-2)+2;
 
     }
-
     public Integer[] DicesToRoll(){
         LinkedList<Faces> faces=facesToRoll();
         Integer[] diceList=new Integer[8];
@@ -40,10 +39,6 @@ public class Brain {
             }
             index++;
         }
-        if(count<2){
-            return null;
-        }
-        logger.log( Level.INFO,"Player "+player.getName()+" decided to roll " + count + " dices\n");
         return diceList;
     }
     private LinkedList<Faces> facesToRoll(){
@@ -79,10 +74,17 @@ public class Brain {
     public boolean ifEndRound(){
         if(stretagy.equals("smart")){ //problems to fix
             int score=pkGame.score(player.getFaces());
-            if(DicesToRoll()==null){
+            try{
+                Integer[] x=DicesToRoll();
+                int a=x[1];
+            }
+            catch(NullPointerException e){
                 return true;
             }
-            if(score+player.getScore()>=1000){
+            if (score>=1000){
+                return true;
+            }
+            if(score+player.getScore()>=6000){
                 return true;
             }
         }
@@ -92,9 +94,6 @@ public class Brain {
 
             if(r.nextInt()%2==0){
                 return true;
-            }
-            else{
-                return false;
             }
         }
 
