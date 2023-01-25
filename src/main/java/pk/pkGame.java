@@ -3,7 +3,13 @@ package pk;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class pkGame {
+
+    private static final Logger logger= LogManager.getLogger(Player.class.getName());
     public pkGame(Player[] players, int numGames, boolean traceMode){
 
         int gameCount=0;
@@ -23,6 +29,7 @@ public class pkGame {
                     round(player);
                     if (winner(player)) {
                         endround=true;
+                        logger.log(Level.INFO, player.getName()+" Win\n");
                         break;
                     }
                 }
@@ -54,6 +61,7 @@ public class pkGame {
             skullCount=player.getSkullCount();
 
             if (skullCount >= 3) {
+                logger.log(Level.INFO,player.getName()+" ended round bec 3 or more skull\n");
                 endRound=true;
                 score=0;
             }
@@ -61,6 +69,8 @@ public class pkGame {
 
 
         player.addScore(score);
+
+        logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");
         //make sure give back dices
         player.resetDice();
 

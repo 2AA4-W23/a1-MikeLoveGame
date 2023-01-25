@@ -98,7 +98,7 @@ public class Player {
 
     public boolean ifEndRound() {
         if(brain.ifEndRound()&& traceMode==true){
-            logger.log(Level.INFO, this.name+"decided to end round");
+            logger.log(Level.INFO, this.name+"decided to end round\n");
         }
         return brain.ifEndRound();
 
@@ -114,9 +114,7 @@ public class Player {
             if (faces[i] != Faces.SKULL) {
                 faces[i]=Dices[i].roll();
                 count++;
-                if(traceMode){
-                    logger.log(Level.INFO, this.name+" Dice rolled:"+faces[i]);
-                }
+
             }
             i++;
         }
@@ -126,26 +124,26 @@ public class Player {
         Integer[] dicesToRoll=this.brain.DicesToRoll();
         int i=0;
         if(dicesToRoll==null){ //this is added because if a smart player gets a magnificent hand in the first round,
-            //it would be asked to end the game but roll the dice, then it will be asked to how many will roll, if hte answer belows 2 it has a bug to fix
+            //it would be asked to end the game but roll the dice,
+            // then it will be asked to how many will roll, if hte answer belows 2 it has a bug to fix
             return;
         }
-        while(dicesToRoll[i]!=null){
+        while(i<dicesToRoll.length && dicesToRoll[i]!=null ){
             int x=dicesToRoll[i];
             this.faces[x]=this.Dices[x].roll();
-            if(traceMode){
-                logger.log(Level.INFO, this.name+" Dice rolled:"+faces[i]);
-            }
             i++;
         }
     }
 
     public void rollDice(){
+        logger.log(Level.INFO, " before rolling the dice, "+this.getName()+" hold following faces"+ Faces.toString(faces)+"\n");
         if(this.brain.getStrategy()=="dead roll"){
             this.rollRandomDice();
         }
         else if(this.brain.getStrategy()=="smart"){
            this.smartRoll();
         }
+        logger.log(Level.INFO, " after rolling the dice, "+this.getName()+" hold following faces"+ Faces.toString(faces)+"\n");
     }
 
     private static int numDiceToRoll(Player player) {
@@ -157,7 +155,7 @@ public class Player {
         num = player.brain.numDiceToRoll(usableDice);
 
         if(traceMode){
-            logger.log( Level.INFO,"Player "+player.name+" decided to roll " + num+" dices");
+            logger.log( Level.INFO,"Player "+player.name+" decided to roll " + num+" dices\n");
         }
 
         return num;

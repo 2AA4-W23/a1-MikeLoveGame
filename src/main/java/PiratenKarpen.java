@@ -14,7 +14,7 @@ public class PiratenKarpen {
             numGames= Integer.parseInt(args[0]);
         }
         catch(Exception e){
-            numGames=30;
+            numGames=1;
         }
 
         boolean traceMode=false;
@@ -23,11 +23,11 @@ public class PiratenKarpen {
         }
 
         catch(Exception e){
-            traceMode=false;
+            traceMode=true;
         }
 
 
-        player1=new Player("player1");
+        player1=new Player("player1", "smart");
         player2=new Player("player2");
 
         try{
@@ -45,16 +45,13 @@ public class PiratenKarpen {
 
         int player1Wins=player1.getWins();
         int player2Wins=player2.getWins();
-        int draw=numGames-player1Wins-player2Wins;
 
 
         double player1Winrate=player1Wins/(double)numGames*100;
         double player2Winrate=player2Wins/(double)numGames*100;
-        double drawrate=draw/(double)numGames*100;
 
         System.out.printf("player1 Wins %5.2f %%\n", player1Winrate);
         System.out.printf("player2 Wins %5.2f %%\n", player2Winrate);
-        System.out.printf("draws: %5.2f %%\n",drawrate);
         System.out.println("That's all folks!");
     }
 

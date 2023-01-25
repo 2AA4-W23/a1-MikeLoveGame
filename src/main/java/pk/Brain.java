@@ -25,7 +25,7 @@ public class Brain {
     }
 
     public Integer[] DicesToRoll(){
-        Faces[] faces=facesToRoll();
+        LinkedList<Faces> faces=facesToRoll();
         Integer[] diceList=new Integer[8];
         int index=0;
         int count=0;
@@ -35,6 +35,7 @@ public class Brain {
                 if(face1==face2){
                     diceList[count]=index;
                     count++;
+                    break;
                 }
             }
             index++;
@@ -42,16 +43,15 @@ public class Brain {
         if(count<2){
             return null;
         }
-        logger.log( Level.INFO,"Player "+player.getName()+" decided to roll " + count + " dices");
+        logger.log( Level.INFO,"Player "+player.getName()+" decided to roll " + count + " dices\n");
         return diceList;
     }
-    private Faces[] facesToRoll(){
+    private LinkedList<Faces> facesToRoll(){
 
         Faces[] faces=player.getFaces();
 
         Hashtable<Faces, Integer> faceList=new Hashtable();
-        Faces[] facesNeedRoll= new Faces[8];
-        int count=0;
+        LinkedList<Faces> facesNeedRoll= new LinkedList<>();
 
         for (Faces face: faces) {
             if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
@@ -67,7 +67,7 @@ public class Brain {
 
         faceList.forEach((k,v)->{
             if (v<3){
-                facesNeedRoll[count]=k;
+                facesNeedRoll.add(k);
             }
         }
         );
