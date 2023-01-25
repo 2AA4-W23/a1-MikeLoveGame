@@ -124,16 +124,17 @@ public class Player {
     private void smartRoll(){
         Integer[] dicesToRoll=this.brain.DicesToRoll();
         int i=0;
+        String dicesChosen="dice number:";
 
         while(i<dicesToRoll.length && dicesToRoll[i]!=null){
             int x;
             x=dicesToRoll[i];
-
+            dicesChosen+= Integer.toString(x+1)+" ";
             this.faces[x]=this.Dices[x].roll();
             i++;
         }
 
-        logger.log( Level.INFO,"Player "+this.getName()+" decided to roll " + i + " dices\n");
+        logger.log( Level.INFO,"Player "+this.getName()+" decided to roll " + dicesChosen+" dices\n");
     }
 
     public void rollDice(){
