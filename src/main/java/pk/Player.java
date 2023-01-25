@@ -22,7 +22,7 @@ public class Player {
 
     public Player(String name) {
         this(name,"dead roll");
-    }
+    } //dead roll is the default strategy for player
 
     public Player(String name,String Strategy) {
         for (int i = 0; i < Dices.length; i++) {
@@ -31,6 +31,7 @@ public class Player {
         }
         this.name=name;
         brain=new Brain(this,Strategy);
+        this.resetDice();
     }
 
 
@@ -97,15 +98,15 @@ public class Player {
     }
 
     public boolean ifEndRound() {
-        if(brain.ifEndRound()){
-            logger.log(Level.INFO, this.name+"decided to end round");
+        if(brain.ifEndRound()&& traceMode==true){
+            logger.log(Level.INFO, this.name+"decided to end round\n");
         }
         return brain.ifEndRound();
 
     }//not implemented yet, wrote for future features
 
-    public void rollRandomDice() {
-        int num = numDiceToRoll();
+    private void rollRandomDice() {
+        int num = numDiceToRoll(this);
         int count=0;
         int i = 0;
 
@@ -114,51 +115,51 @@ public class Player {
             if (faces[i] != Faces.SKULL) {
                 faces[i]=Dices[i].roll();
                 count++;
-                if(traceMode){
-                    logger.log(Level.INFO, this.name+" Dice rolled:"+faces[i]);
-                }
+
             }
             i++;
         }
     }
 
-    public void smartRoll(){
+    private void smartRoll(){
         Integer[] dicesToRoll=this.brain.DicesToRoll();
         int i=0;
-        if(dicesToRoll==null){ //this is added because if a smart player gets a magnificent hand in the first round,
-            //it would be asked to end the game but roll the dice, then it will be asked to how many will roll, if hte answer belows 2 it has a bug to fix
-            return;
-        }
-        while(dicesToRoll[i]!=null){
-            int x=dicesToRoll[i];
+        String dicesChosen="dice number:";
+
+        while(i<dicesToRoll.length && dicesToRoll[i]!=null){
+            int x;
+            x=dicesToRoll[i];
+            dicesChosen+= Integer.toString(x+1)+" ";
             this.faces[x]=this.Dices[x].roll();
-            if(traceMode){
-                logger.log(Level.INFO, this.name+" Dice rolled:"+faces[i]);
-            }
             i++;
         }
+
+        logger.log( Level.INFO,"Player "+this.getName()+" decided to roll " + dicesChosen+" dices\n");
     }
 
     public void rollDice(){
+        logger.log(Level.INFO, " before rolling the dice, "+this.getName()+" hold following faces"+ Faces.toString(faces)+"\n");
         if(this.brain.getStrategy()=="dead roll"){
             this.rollRandomDice();
         }
         else if(this.brain.getStrategy()=="smart"){
            this.smartRoll();
         }
+        logger.log(Level.INFO, " after rolling the dice, "+this.getName()+" hold following faces"+ Faces.toString(faces)+"\n");
     }
 
-    public int numDiceToRoll() {
+    private static int numDiceToRoll(Player player) {
         Random r = new Random();
-        int usableDice=Dices.length-getSkullCount();
+        int usableDice=player.Dices.length-player.getSkullCount();
 
         int num;
 
-        num = brain.numDiceToRoll(usableDice);
+        num = player.brain.numDiceToRoll(usableDice);
 
         if(traceMode){
-            logger.log( Level.INFO,"Player "+this.name+" decided to roll " + num+" dices");
+            logger.log( Level.INFO,"Player "+player.name+" decided to roll " + num+" dices\n");
         }
+
         return num;
     }
 

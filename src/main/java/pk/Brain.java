@@ -23,9 +23,8 @@ public class Brain {
         return r.nextInt(usableDice-2)+2;
 
     }
-
     public Integer[] DicesToRoll(){
-        Faces[] faces=facesToRoll();
+        LinkedList<Faces> faces=facesToRoll();
         Integer[] diceList=new Integer[8];
         int index=0;
         int count=0;
@@ -35,23 +34,19 @@ public class Brain {
                 if(face1==face2){
                     diceList[count]=index;
                     count++;
+                    break;
                 }
             }
             index++;
         }
-        if(count<2){
-            return null;
-        }
-        logger.log( Level.INFO,"Player "+player.getName()+" decided to roll " + count + " dices");
         return diceList;
     }
-    private Faces[] facesToRoll(){
+    private LinkedList<Faces> facesToRoll(){
 
         Faces[] faces=player.getFaces();
 
         Hashtable<Faces, Integer> faceList=new Hashtable();
-        Faces[] facesNeedRoll= new Faces[8];
-        int count=0;
+        LinkedList<Faces> facesNeedRoll= new LinkedList<>();
 
         for (Faces face: faces) {
             if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
@@ -67,7 +62,7 @@ public class Brain {
 
         faceList.forEach((k,v)->{
             if (v<3){
-                facesNeedRoll[count]=k;
+                facesNeedRoll.add(k);
             }
         }
         );
@@ -79,10 +74,17 @@ public class Brain {
     public boolean ifEndRound(){
         if(stretagy.equals("smart")){ //problems to fix
             int score=pkGame.score(player.getFaces());
-            if(DicesToRoll()==null){
+            try{
+                Integer[] x=DicesToRoll();
+                int a=x[1];
+            }
+            catch(NullPointerException e){
                 return true;
             }
-            if(score+player.getScore()>=1000){
+            if (score>=1000){
+                return true;
+            }
+            if(score+player.getScore()>=6000){
                 return true;
             }
         }
@@ -92,9 +94,6 @@ public class Brain {
 
             if(r.nextInt()%2==0){
                 return true;
-            }
-            else{
-                return false;
             }
         }
 

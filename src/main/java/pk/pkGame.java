@@ -3,7 +3,13 @@ package pk;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class pkGame {
+
+    private static final Logger logger= LogManager.getLogger(Player.class.getName());
     public pkGame(Player[] players, int numGames, boolean traceMode){
 
         int gameCount=0;
@@ -15,7 +21,6 @@ public class pkGame {
 
             for (Player player: players) {
                 player.resetScore();
-                player.resetDice();
             }
 
             while(!endround) {
@@ -23,6 +28,7 @@ public class pkGame {
                     round(player);
                     if (winner(player)) {
                         endround=true;
+                        logger.log(Level.INFO, player.getName()+" Win\n");
                         break;
                     }
                 }
@@ -42,25 +48,20 @@ public class pkGame {
 
         int score=0;
 
-        while (!endRound) {
+        while (!player.ifEndRound()) {
             player.rollDice();
-
-            endRound=player.ifEndRound();
-
-            if(endRound){
-                score=score(player.getFaces());
-            }
-
             skullCount=player.getSkullCount();
-
             if (skullCount >= 3) {
-                endRound=true;
-                score=0;
+                logger.log(Level.INFO,player.getName()+" ended round bec 3 or more skull\n");
+                break;
             }
         }
 
-
-        player.addScore(score);
+        if (player.getSkullCount() < 3) {
+            score=score(player.getFaces());
+            player.addScore(score);
+        }
+        logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");
         //make sure give back dices
         player.resetDice();
 
