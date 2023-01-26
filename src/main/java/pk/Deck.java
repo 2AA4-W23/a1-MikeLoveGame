@@ -1,4 +1,5 @@
 package pk;
+import java.util.*;
 /*deck is implemented as a linked list*/
 public abstract class Deck {
     private class Node{
@@ -48,11 +49,41 @@ public abstract class Deck {
         ptr.next=null;
     }
 
+    private void cutDeck(Node ptr){
+
+        end.next=this.head;
+        this.head=ptr.next;
+        ptr.next=null;
+    }
+
+    private void insertEnd(Node prev, Node ptr){
+        if( prev==null){
+            head=head.next;
+            end.next=ptr;
+            end=end.next;
+            return;
+        }
+        prev.next=ptr.next;
+        end.next=ptr;
+        end=end.next;
+    }
     public void quickShuffle(){
+        Random r= new Random();
+        Node prev=null;
+        Node ptr=head;
+        int i=0;
+        int step;
+        int cut=1+r.nextInt(size)-1;
 
-       
-
-
+        while(i<size/4){
+            step=1+r.nextInt(3);
+            for (int j = 0; j < step; j++) {
+                prev=ptr;
+                ptr=ptr.next;
+            }
+            insertEnd(prev, ptr);
+        }
+        cutDeck(cut);
 
     }
 
