@@ -11,7 +11,7 @@ public class FortuneCard extends Card{
     private Face face;
     public FortuneCard(){
         face=Face.nop;
-    }
+    } //in see battle, Saber and sword is the same shit
 
     public FortuneCard(int val){
         face=Face.values()[val];

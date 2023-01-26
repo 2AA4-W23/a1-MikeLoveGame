@@ -47,3 +47,5 @@ Jan 24th 2023
 Jan 25th 2023
     update the lambda on hashmap to a loop
     implementing feature F21-23
+    abstract class Card and Decks are implemented for future design
+    (even different Game)

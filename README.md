@@ -57,5 +57,8 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | ✓   | F23 | implement Full Chest| D | 23/01/25 | 23/01/25 |
 | ✓   | F24 | Implemented abstract object Card| D | 23/01/25 | 23/01/25 |
 | ✓   | F25 | Implemented abstract object Deck| D | 23/01/25 | 23/01/25 |
+| ✓   | F26 | Player Draws a card before each round| P | ||
+| ✓   | F27 | Implement Seabattal round style| P | ||
+| ✓   | F26 | Strategy specifically for battle mechanics| P | ||
 | ... | ... | ... |
 
