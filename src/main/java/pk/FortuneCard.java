@@ -2,24 +2,27 @@ package pk;
 
 import java.util.*;
 
-public class FortuneCard extends Card implements Comparator<FortuneCard>{
+public class FortuneCard extends Card{
 
 
 
     private enum Face{Treasure_Chest, Captain, Sorceress, Sea_Battle, Gold, Diamond, Monkey_Bussiness, Skull, nop}
 
-    private Face FaceValue;
+    private Face face;
     public FortuneCard(){
-        FaceValue=Face.nop;
+        face=Face.nop;
+    }
+
+    public FortuneCard(int val){
+        face=Face.values()[val];
     }
 
     @Override
-    public int compare(FortuneCard o1, FortuneCard o2) {
-        return 0;
+    public String getFace(){
+        return this.face.toString();
     }
-
     @Override
     public int compareTo(Card o) {
-        return 0;
+        return face.compareTo(Face.valueOf(o.getFace()));
     }
 }

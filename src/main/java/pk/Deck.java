@@ -9,9 +9,9 @@ public abstract class Deck {
             this.card=card;
         }
     }
-    protected Node head;
-    protected int size;
-    protected Node end;
+    private Node head;
+    private int size;
+    private Node end;
     public Deck(Card head){
         this.head=new Node(head);
         end =this.head;
@@ -41,6 +41,9 @@ public abstract class Deck {
 
     public void cutDeck(int pos){
         Node ptr=head;
+        if(pos>size){
+            return;
+        }
         for (int i = 0; i < pos-1; i++) {
             ptr=ptr.next;
         }
@@ -50,7 +53,6 @@ public abstract class Deck {
     }
 
     private void cutDeck(Node ptr){
-
         end.next=this.head;
         this.head=ptr.next;
         ptr.next=null;
@@ -85,6 +87,26 @@ public abstract class Deck {
         }
         cutDeck(cut);
 
+    }
+
+    public Card getHead(){
+        Card temp=head.card;
+        return temp;
+    }
+    public Card getEnd(){
+        Card temp=end.card;
+        return temp;
+    }
+    public int getSize(){
+        return size;
+    }
+
+    public Card get(int index){
+        Node ptr=head;
+        for (int i = 0; i <index; i++) {
+            ptr=ptr.next;
+        }
+        return ptr.card;
     }
 
 }

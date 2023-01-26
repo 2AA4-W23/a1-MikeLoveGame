@@ -52,9 +52,10 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 | x   | F18 | Implement Stretagy for player | D | 23/01/22 | 23/01/22 |
 | ✓   | F19 | don't gain point with 3 Skull | D | 23/01/22 | 23/01/22 |
 | ✓   | F20 | Player gets to choose which dice to keep, which dice to reroll  | D | 23/01/22 | 23/01/22 |
-| ✓   | F20 | Implemented Random player vs Combo player in command lines| D | 23/01/22 | 23/01/22 |
-| ✓   | F21 | implement pk.Card feature in enum | D |23/01/25 | 23/01/25 |
-| ✓   | F22 | implement Deck with shuffle method| P(F21) | | |
+| ✓   | F21 | Implemented Random player vs Combo player in command lines| D | 23/01/22 | 23/01/22 |
+| ✓   | F22 | implement Deck with shuffle method| D |23/01/25 | 23/01/26 |
 | ✓   | F23 | implement Full Chest| D | 23/01/25 | 23/01/25 |
+| ✓   | F24 | Implemented abstract object Card| D | 23/01/25 | 23/01/25 |
+| ✓   | F25 | Implemented abstract object Deck| D | 23/01/25 | 23/01/25 |
 | ... | ... | ... |
 
