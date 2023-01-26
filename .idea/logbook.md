@@ -43,5 +43,7 @@ Jan 24th 2023
     Paid most of the techincal debts in the last iteration
     major bug fix and deleted redundent logics
     Planning new features for the last iteration 
-    
-    
+
+Jan 25th 2023
+    update the lambda on hashmap to a loop
+    implementing feature F21-23
