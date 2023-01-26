@@ -3,14 +3,19 @@ package pk;
 public class FortuneDeck extends Deck {
 
     private Card head;
-    private Card next;
+    private FortuneDeck next;
     private int size;
+
+    public FortuneDeck(){
+
+    }
 
     public FortuneDeck(int size){
         int i=0;
         Card ptr;
+        head=new FortuneCard();
+        next=new FortuneDeck();
         while(i<size){
-            head=new FortuneCard();
         }
     }
 
@@ -23,6 +28,7 @@ public class FortuneDeck extends Deck {
         int shuffleTime=length*2;
         int i=0;
         while(i<shuffleTime){
+
         }
 
     }
