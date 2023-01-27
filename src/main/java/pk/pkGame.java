@@ -27,13 +27,14 @@ public class pkGame {
 
             while(!endround) {
                 for (Player player : players) {
-                    if(deck.getSize()>0) {
+                    if(deck.getHead()!=null) {
                         card = (FortuneCard) deck.deal();
                     }
                     else{
                         Deck.resetDeck(deck);
                         card=(FortuneCard) deck.deal();
                     }
+                    logger.log(Level.INFO, "card Drawn is "+card.getFace());
                     if(card.getFace().equals("Sea_Battle")){
                         if(traceMode){
                             logger.log(Level.INFO,player.getName()+" is in a sea battle");
@@ -92,12 +93,14 @@ public class pkGame {
             player.rollDice();
             skullCount=player.getSkullCount();
             if (skullCount >= 3) {
-                if(Player.traceMode){logger.log(Level.INFO,player.getName()+" lost sea battle since have 2 skull\n");}
+                if(Player.traceMode){logger.log(Level.INFO,player.getName()+" lost sea battle since have 3 skull\n");}
                 break;
             }
             else{
                 Hashtable<Faces, Integer> faceList=Player.getFaceCount(player.getFaces());
-                saberCount=faceList.get(Faces.SABER);
+                if(faceList.containsKey(Faces.SABER)){
+                    saberCount=faceList.get(Faces.SABER);
+                }
                 if(saberCount>=4){
                     break;
                 }
@@ -111,6 +114,7 @@ public class pkGame {
         }
         else{
             player.deduceScore(reward);
+            score=score-reward;
         }
 
         if(Player.traceMode){logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");}
