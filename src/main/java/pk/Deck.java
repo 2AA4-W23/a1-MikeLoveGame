@@ -31,9 +31,13 @@ public class Deck {
             size=1;
             return;
         }
+
         Node head=this.head;
         this.head=new Node(card);
         this.head.next=head;
+        if(head==end){
+            end=head.next;
+        }
         size++;
     }
     public void insertEnd(Card card){
@@ -43,7 +47,8 @@ public class Deck {
             size=1;
             return;
         }
-        end.next=new Node(card);
+
+        end.next=new Node(card);//bug appears on rare case where end is null, but head is not null
         end = end.next;
         size++;
     }

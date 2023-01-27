@@ -16,6 +16,7 @@ public class pkGame {
         Player.traceMode=traceMode;
         FortuneDeck deck=new FortuneDeck();
         deck.quickShuffle();
+        FortuneCard card;
 
         while(gameCount<numGames){
             boolean endround=false;
@@ -26,8 +27,17 @@ public class pkGame {
 
             while(!endround) {
                 for (Player player : players) {
-                    FortuneCard card=(FortuneCard)deck.deal();
+                    if(deck.getSize()>0) {
+                        card = (FortuneCard) deck.deal();
+                    }
+                    else{
+                        Deck.resetDeck(deck);
+                        card=(FortuneCard) deck.deal();
+                    }
                     if(card.getFace().equals("Sea_Battle")){
+                        if(traceMode){
+                            logger.log(Level.INFO,player.getName()+" is in a sea battle");
+                        }
                         seaBattleRound(player, card);
                     }
                     else{normalRound(player);}
