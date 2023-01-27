@@ -1,7 +1,6 @@
 package pk;
 
 import java.util.Hashtable;
-import java.util.Map;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -10,11 +9,14 @@ import org.apache.logging.log4j.Logger;
 public class pkGame {
 
     private static final Logger logger= LogManager.getLogger(Player.class.getName());
+
     public pkGame(Player[] players, int numGames, boolean traceMode){
 
         int gameCount=0;
         Player.traceMode=traceMode;
-
+        FortuneDeck deck=new FortuneDeck();
+        deck.quickShuffle();
+        FortuneCard card;
 
         while(gameCount<numGames){
             boolean endround=false;
@@ -25,45 +27,102 @@ public class pkGame {
 
             while(!endround) {
                 for (Player player : players) {
-                    round(player);
+                    if(deck.getHead()!=null) {
+                        card = (FortuneCard) deck.deal();
+                    }
+                    else{
+                        Deck.resetDeck(deck);
+                        card=(FortuneCard) deck.deal();
+                    }
+                    logger.log(Level.INFO, "card Drawn is "+card.getFace());
+                    if(card.getFace().equals("Sea_Battle")){
+                        if(traceMode){
+                            logger.log(Level.INFO,player.getName()+" is in a sea battle");
+                        }
+                        seaBattleRound(player, card);
+                    }
+                    else{normalRound(player);}
                     if (winner(player)) {
                         endround=true;
-                        logger.log(Level.INFO, player.getName()+" Win\n");
+                        if(traceMode){logger.log(Level.INFO, player.getName()+" Win\n");}
                         break;
                     }
                 }
             }
             gameCount++;
+            Deck.resetDeck(deck);
         }
 
     }
 
-    private static void round(Player player)  {
+    private static void normalRound(Player player)  {
 
         int skullCount = 0;
 
-        boolean endRound = false;
-
-        Faces[] faces;
 
         int score=0;
 
-        while (!player.ifEndRound()) {
+        do{
             player.rollDice();
             skullCount=player.getSkullCount();
             if (skullCount >= 3) {
-                logger.log(Level.INFO,player.getName()+" ended round bec 3 or more skull\n");
+                if(Player.traceMode){logger.log(Level.INFO,player.getName()+" ended round bec 3 or more skull\n");}
                 break;
+            }
+        }while (!player.ifEndRound());
+
+        if (player.getSkullCount() < 3) {
+            score=score(player.getFaces());
+            player.addScore(score);
+        }
+        if(Player.traceMode){logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");}
+        //make sure give back dices
+        player.resetDice();
+
+    }
+
+    private static void seaBattleRound(Player player, FortuneCard card){
+        int reward=card.getValue();
+        int skullCount = 0;
+        int saberCount=0;
+        int score=0;
+
+        boolean endRound=false;
+
+        while (!endRound) {
+            player.rollDice();
+            skullCount=player.getSkullCount();
+            if (skullCount >= 3) {
+                if(Player.traceMode){logger.log(Level.INFO,player.getName()+" lost sea battle since have 3 skull\n");}
+                break;
+            }
+            else{
+                Hashtable<Faces, Integer> faceList=Player.getFaceCount(player.getFaces());
+                if(faceList.containsKey(Faces.SABER)){
+                    saberCount=faceList.get(Faces.SABER);
+                }
+                if(saberCount>=4){
+                    break;
+                }
             }
         }
 
         if (player.getSkullCount() < 3) {
             score=score(player.getFaces());
             player.addScore(score);
+            player.addScore(reward);
         }
-        logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");
+        else{
+            player.deduceScore(reward);
+            score=score-reward;
+        }
+
+        if(Player.traceMode){logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");}
         //make sure give back dices
         player.resetDice();
+    }
+
+    public static void resetGame(){
 
     }
 
@@ -80,56 +139,36 @@ public class pkGame {
 
         //key is the type, value is the score to the type
 
-        Hashtable<String, Integer> Rules = new Hashtable<>();
-        Rules.put("3 of a kind",100);
-        Rules.put("4 of a kind", 200);
-        Rules.put("5 of a kind",500);
-        Rules.put("6 of a kind", 1000);
-        Rules.put("7 of a kind", 2000);
-        Rules.put("8 of a kind", 4000);
-        Rules.put("Diamond", 100);
-        Rules.put("Gold", 100);
+        Hashtable<Integer, Integer> Rules = new Hashtable<>();
+        Rules.put(3,100);//3 of a kind
+        Rules.put(4, 200);//4 of a kind
+        Rules.put(5,500);//5 of a kind
+        Rules.put(6, 1000);//6 of a kind
+        Rules.put(7, 2000);//7 of a kind
+        Rules.put(8, 4000);//8 of a kind
 
-        int score[] = new int[1];//variables in lambda must be final
-        Hashtable<Faces, Integer> faceList=new Hashtable();
+        int score = 0;//variables in lambda must be final
+        Hashtable<Faces, Integer> faceList= Player.getFaceCount(faces);
+        int count=0;
+        for(Faces k: faceList.keySet()){
+            int v=faceList.get(k);
+            if(v>2){
+                count+=v;
+                score+=Rules.get(v);
+            }
 
-        for (Faces face: faces) {
-            if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
-                continue;
-            }
-            else if (!faceList.containsKey(face)){
-                faceList.put(face,1);
-            }
-            else{
-                faceList.put(face,(faceList.get(face)+1));
-            }
-        }
-
-        faceList.forEach((k,v)->{
-            switch(v) {
-                case 3:
-                    score[0]+=Rules.get("3 of a kind");
-                    break;
-                case 4:
-                    score[0]+=Rules.get("4 of a kind");
-                    break;
-                case 5:
-                    score[0]+=Rules.get("5 of a kind");
-                    break;
-                case 6:
-                    score[0]+=Rules.get("6 of a kind");
-                    break;
-                case 7:
-                    score[0]+=Rules.get("7 of a kind");
-                    break;
-                default:
-                    break;
-            }
             if(k==Faces.DIAMOND|| k==Faces.GOLD){
-                score[0]+=100*v;
+                score+=100*v;
             }
-        });
-        return score[0];
+
+        }
+        if(count==8){//full chest
+            score+=500;
+        }
+        return score;
     }
+
+
+
 
 }

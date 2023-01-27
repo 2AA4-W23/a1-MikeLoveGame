@@ -4,7 +4,11 @@ import java.util.*;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+/**
+ The Desciption of the method to explain what this object do:
+ This object is the decision headquarter for the player where it tells
+ the player what to do when the player's strategy is combo driven
+ */
 public class Brain {
     private final String stretagy;
     private final Player player;
@@ -99,7 +103,6 @@ public class Brain {
 
         return false;
     }
-
 
 
 }

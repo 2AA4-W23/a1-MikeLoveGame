@@ -27,7 +27,7 @@ public class PiratenKarpen {
         }
 
 
-        player1=new Player("player1", "smart");
+        player1=new Player("player1");
         player2=new Player("player2");
 
         try{
@@ -49,7 +49,7 @@ public class PiratenKarpen {
 
         double player1Winrate=player1Wins/(double)numGames*100;
         double player2Winrate=player2Wins/(double)numGames*100;
-
+        System.out.println("total games played: "+numGames);
         System.out.printf("player1 Wins %5.2f %%\n", player1Winrate);
         System.out.printf("player2 Wins %5.2f %%\n", player2Winrate);
         System.out.println("That's all folks!");

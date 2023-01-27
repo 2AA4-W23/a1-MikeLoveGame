@@ -33,25 +33,32 @@ Remark: **We are assuming here you are using a _real_ shell (e.g., anything but 
 
 | MVP? | Id  | Feature  | Status  |  Started  | Delivered |
 | :-:  |:-:  |---       | :-:     | :-:       | :-:       |
-| x   | F01 | Roll a dice |  D | 01/01/13| 01/01/13 |
-| x   | F02 | Roll eight dices  |  D | 01/01/13| 01/01/13 |
-| x   | F03 | Select how many games as command-line arg.  |  D  | 01/01/13| 01/01/13 |
-| x   | F04 | end of game with three cranes | D | 01/01/14| 01/01/14 |
-| x   | F05 | Player keeping random dice at their turn | D | 01/01/14| 01/01/14 |
-| x   | F06 | Score points: 3-of-a-kind | D | 01/01/14| 01/01/14 |
-| x   | F07 | Score points: gold and diamond  | D  | 01/01/15| 01/01/15 |
-| x   | F08 | Implement stretagy "Randomly roll dice until the end" for player  |D| 01/01/15| 01/01/15 |
-| x   | F09 | Implement game with 2 players using identical stretagy  | D| 01/01/15| 01/01/15 |
-| x   | F10 | Print results of the game | D | 01/01/15| 01/01/15 |
-| x   | F11 | Always play 42 games without command-line arg | D | 01/01/15| 01/01/15 |
-| x   | F12 | Implement player with higer point wins| D | 01/01/15| 01/01/15 |
-| x   | F13 | Implement score system from 3 of a kind to 7 of a kind | D | 01/01/15| 01/01/15 |
-| x   | F14 | Create Player as a seperate Object | D | 01/01/17| 01/01/17 |
-| x   | F15 | Implement full score system| D | 01/01/15| 01/01/15 |
-| x   | F17 | Implement comulated 6000 point player wins otherwise continue | D | 01/01/20| 01/01/20 |
-| x   | F18 | Implement Stretagy for player | D | 01/01/21 | 01/01/22 |
-| x   | F19 | don't gain point with 3 Skull | D | 01/01/22 | 01/01/22 |
-| x   | F20 | Player gets to choose which dice to keep, which dice to reroll  | D | 01/01/22 | 01/01/22 |
-| x   | F20 | Implemented Random player vs Combo player in command lines| D | 01/01/22 | 01/01/22 |
+| ✓   | F01 | Roll a dice |  D | 23/01/14 | 23/01/14 |
+| ✓   | F02 | Roll eight dices  |  D | 23/01/14 | 23/01/14 |
+| ✓   | F03 | Select how many games as command-line arg.  |  D  | 23/01/14 | 23/01/14 |
+| ✓   | F04 | end of game with three cranes | D | 23/01/14 | 23/01/14 |
+| ✓   | F05 | Player keeping random dice at their turn | D | 23/01/14 | 23/01/14 |
+| ✓   | F06 | Score points: 3-of-a-kind | D | 23/01/14 | 23/01/14 |
+| ✓   | F07 | Score points: gold and diamond  | D  | 23/01/14 | 23/01/14 |
+| ✓   | F08 | Implement stretagy "Randomly roll dice until the end" for player  |D| 23/01/15 | 23/01/15 |
+| ✓   | F09 | Implement game with 2 players using identical stretagy  | D| 23/01/15 | 23/01/15 |
+| ✓   | F10 | Print results of the game | D | 23/01/15 | 23/01/15 |
+| x   | F11 | Always play 42 games without command-line arg | D | 23/01/15 | 23/01/15 |
+| ✓   | F12 | Implement player with higher point wins| D | 23/01/15 | 23/01/15 |
+| ✓   | F13 | Implement score system from 3 of a kind to 7 of a kind | D | 23/01/15 | 23/01/15 |
+| ✓   | F14 | Create Player as a seperate Object | D | 23/01/17 | 23/01/17 |
+| x   | F15 | Implement full score system| D | 23/01/15 | 23/01/15 |
+| ✓   | F17 | Implement comulated 6000 point player wins otherwise continue | D | 23/01/20 | 23/01/20 |
+| x   | F18 | Implement Stretagy for player | D | 23/01/22 | 23/01/22 |
+| ✓   | F19 | don't gain point with 3 Skull | D | 23/01/22 | 23/01/22 |
+| ✓   | F20 | Player gets to choose which dice to keep, which dice to reroll  | D | 23/01/22 | 23/01/22 |
+| ✓   | F21 | Implemented Random player vs Combo player in command lines| D | 23/01/22 | 23/01/22 |
+| ✓   | F22 | implement Deck with shuffle method| D |23/01/25 | 23/01/26 |
+| ✓   | F23 | implement Full Chest| D | 23/01/25 | 23/01/25 |
+| ✓   | F24 | Implemented abstract object Card| D | 23/01/25 | 23/01/25 |
+| ✓   | F25 | Implemented abstract object Deck| D | 23/01/25 | 23/01/25 |
+| ✓   | F26 | Player Draws a card before each round| D | 23/01/26 | 23/01/26 |
+| ✓   | F27 | Implement Sea battal round style| D | 23/01/26 | 23/01/26 |
+| ✓   | F26 | Strategy specifically for battle mechanics| S | 23/01/26 | |
 | ... | ... | ... |
 

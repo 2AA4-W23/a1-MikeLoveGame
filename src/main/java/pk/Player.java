@@ -22,7 +22,8 @@ public class Player {
 
     public Player(String name) {
         this(name,"dead roll");
-    } //dead roll is the default strategy for player
+    } //dead roll is the default strategy for player who
+    //does not use their brain but relies on probability
 
     public Player(String name,String Strategy) {
         for (int i = 0; i < Dices.length; i++) {
@@ -50,6 +51,27 @@ public class Player {
             facescp[i]=faces[i];
         }
         return facescp;
+    }
+
+    public static Hashtable<Faces, Integer> getFaceCount(Faces[] faces){
+
+        int score = 0;//variables in lambda must be final
+        Hashtable<Faces, Integer> faceList=new Hashtable();
+
+        for (Faces face: faces) {
+            if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
+                continue;
+            }
+            else if (!faceList.containsKey(face)){
+                faceList.put(face,1);
+            }
+            else{
+                faceList.put(face,(faceList.get(face)+1));
+            }
+        }
+
+
+        return faceList;
     }
 
 
@@ -102,8 +124,8 @@ public class Player {
             logger.log(Level.INFO, this.name+"decided to end round\n");
         }
         return brain.ifEndRound();
+    }
 
-    }//not implemented yet, wrote for future features
 
     private void rollRandomDice() {
         int num = numDiceToRoll(this);
@@ -119,6 +141,7 @@ public class Player {
             }
             i++;
         }
+
     }
 
     private void smartRoll(){
@@ -133,20 +156,27 @@ public class Player {
             this.faces[x]=this.Dices[x].roll();
             i++;
         }
-
-        logger.log( Level.INFO,"Player "+this.getName()+" decided to roll " + dicesChosen+" dices\n");
+        if(traceMode) {
+            logger.log(Level.INFO, "Player " + this.getName() + " decided to roll " + dicesChosen + " dices\n");
+        }
     }
 
     public void rollDice(){
-        logger.log(Level.INFO, " before rolling the dice, "+this.getName()+" hold following faces"+ Faces.toString(faces)+"\n");
+        if(traceMode){
+            logger.log(Level.INFO, " before rolling the dice, "+this.getName()+" hold following faces"+ Faces.toString(faces)+"\n");
+        }
         if(this.brain.getStrategy()=="dead roll"){
             this.rollRandomDice();
         }
-        else if(this.brain.getStrategy()=="smart"){
+        else {
            this.smartRoll();
         }
-        logger.log(Level.INFO, " after rolling the dice, "+this.getName()+" hold following faces"+ Faces.toString(faces)+"\n");
+        if(traceMode) {
+            logger.log(Level.INFO, " after rolling the dice, " + this.getName() + " hold following faces" + Faces.toString(faces) + "\n");
+        }
     }
+
+
 
     private static int numDiceToRoll(Player player) {
         Random r = new Random();
@@ -162,10 +192,5 @@ public class Player {
 
         return num;
     }
-
-
-
-
-
-
+    
 }
