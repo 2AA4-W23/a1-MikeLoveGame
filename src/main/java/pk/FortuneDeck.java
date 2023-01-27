@@ -13,4 +13,9 @@ public class FortuneDeck extends Deck {
 
     }
 
+    public static void resetDeck(Deck deck){
+        deck=new FortuneDeck();
+    }
+
+
 }

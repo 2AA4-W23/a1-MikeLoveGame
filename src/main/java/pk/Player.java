@@ -53,6 +53,27 @@ public class Player {
         return facescp;
     }
 
+    public static Hashtable<Faces, Integer> getFaceCount(Faces[] faces){
+
+        int score = 0;//variables in lambda must be final
+        Hashtable<Faces, Integer> faceList=new Hashtable();
+
+        for (Faces face: faces) {
+            if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
+                continue;
+            }
+            else if (!faceList.containsKey(face)){
+                faceList.put(face,1);
+            }
+            else{
+                faceList.put(face,(faceList.get(face)+1));
+            }
+        }
+
+
+        return faceList;
+    }
+
 
     public int getScore() {
         return this.score;
@@ -103,8 +124,8 @@ public class Player {
             logger.log(Level.INFO, this.name+"decided to end round\n");
         }
         return brain.ifEndRound();
+    }
 
-    }//not implemented yet, wrote for future features
 
     private void rollRandomDice() {
         int num = numDiceToRoll(this);
@@ -155,6 +176,8 @@ public class Player {
         }
     }
 
+
+
     private static int numDiceToRoll(Player player) {
         Random r = new Random();
         int usableDice=player.Dices.length-player.getSkullCount();
@@ -169,10 +192,5 @@ public class Player {
 
         return num;
     }
-
-
-
-
-
-
+    
 }

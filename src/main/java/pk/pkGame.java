@@ -1,7 +1,6 @@
 package pk;
 
 import java.util.Hashtable;
-import java.util.Map;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -10,11 +9,13 @@ import org.apache.logging.log4j.Logger;
 public class pkGame {
 
     private static final Logger logger= LogManager.getLogger(Player.class.getName());
+
+    private Player SeaFighter;//store whoever was in a sea Battle
     public pkGame(Player[] players, int numGames, boolean traceMode){
 
         int gameCount=0;
         Player.traceMode=traceMode;
-
+        FortuneDeck deck=new FortuneDeck();
 
         while(gameCount<numGames){
             boolean endround=false;
@@ -25,10 +26,11 @@ public class pkGame {
 
             while(!endround) {
                 for (Player player : players) {
-                    round(player);
+
+                    normalRound(player);
                     if (winner(player)) {
                         endround=true;
-                        logger.log(Level.INFO, player.getName()+" Win\n");
+                        if(traceMode){logger.log(Level.INFO, player.getName()+" Win\n");}
                         break;
                     }
                 }
@@ -38,24 +40,21 @@ public class pkGame {
 
     }
 
-    private static void round(Player player)  {
+    private static void normalRound(Player player)  {
 
         int skullCount = 0;
 
-        boolean endRound = false;
-
-        Faces[] faces;
 
         int score=0;
 
-        while (!player.ifEndRound()) {
+        do{
             player.rollDice();
             skullCount=player.getSkullCount();
             if (skullCount >= 3) {
                 if(Player.traceMode){logger.log(Level.INFO,player.getName()+" ended round bec 3 or more skull\n");}
                 break;
             }
-        }
+        }while (!player.ifEndRound());
 
         if (player.getSkullCount() < 3) {
             score=score(player.getFaces());
@@ -64,6 +63,48 @@ public class pkGame {
         if(Player.traceMode){logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");}
         //make sure give back dices
         player.resetDice();
+
+    }
+
+    private static void seaBattleRound(Player player, FortuneCard card){
+        int reward=card.getValue();
+        int skullCount = 0;
+        int saberCount=0;
+        int score=0;
+
+        boolean endRound=false;
+
+        while (!endRound) {
+            player.rollDice();
+            skullCount=player.getSkullCount();
+            if (skullCount >= 3) {
+                if(Player.traceMode){logger.log(Level.INFO,player.getName()+" lost sea battle since have 2 skull\n");}
+                break;
+            }
+            else{
+                Hashtable<Faces, Integer> faceList=Player.getFaceCount(player.getFaces());
+                saberCount=faceList.get(Faces.SABER);
+                if(saberCount>=4){
+                    break;
+                }
+            }
+        }
+
+        if (player.getSkullCount() < 3) {
+            score=score(player.getFaces());
+            player.addScore(score);
+            player.addScore(reward);
+        }
+        else{
+            player.deduceScore(reward);
+        }
+
+        if(Player.traceMode){logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");}
+        //make sure give back dices
+        player.resetDice();
+    }
+
+    public static void resetGame(){
 
     }
 
@@ -89,19 +130,7 @@ public class pkGame {
         Rules.put(8, 4000);//8 of a kind
 
         int score = 0;//variables in lambda must be final
-        Hashtable<Faces, Integer> faceList=new Hashtable();
-
-        for (Faces face: faces) {
-            if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
-                continue;
-            }
-            else if (!faceList.containsKey(face)){
-                faceList.put(face,1);
-            }
-            else{
-                faceList.put(face,(faceList.get(face)+1));
-            }
-        }
+        Hashtable<Faces, Integer> faceList= Player.getFaceCount(faces);
         int count=0;
         for(Faces k: faceList.keySet()){
             int v=faceList.get(k);
@@ -120,5 +149,8 @@ public class pkGame {
         }
         return score;
     }
+
+
+
 
 }

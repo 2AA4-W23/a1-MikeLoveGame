@@ -49,3 +49,8 @@ Jan 25th 2023
     implementing feature F21-23
     abstract class Card and Decks are implemented for future design
     (even different Game)
+Jan 26th 2023
+    bug fix on random player logging 
+    reconstructing scoring system
+    refractoring 
+    
