@@ -51,14 +51,18 @@ public class Deck {
     }
 
     public Card deal(){
-        Node first=head;
-        head=head.next;
-        if(end ==first){
-            end=head;
+        Card first=head.card;
+        
+        try{
+            head=head.next;
         }
+        catch(NullPointerException e){
+            head=null;
+        }
+
         size--;
-        antideck.insertEnd(first.card);
-        return first.card;
+        antideck.insertEnd(first);
+        return first;
     }
 
     public void cutDeck(int pos){
@@ -99,7 +103,7 @@ public class Deck {
         Node ptr=head;
         int i=0;
         int step;
-        int cut=1+r.nextInt(size)-1;
+        int cut=2+r.nextInt(size)-4;
 
         while(i<size/4){
             step=1+r.nextInt(3);
@@ -133,10 +137,17 @@ public class Deck {
         }
         return ptr.card;
     }
+
     public static void resetDeck(Deck deck){ //YESSS, IMMAA FUCKING GENIOUSSSSS
         if(deck.antideck.size==0){
             return;
         }
+        if(deck.head==null){
+            deck.head=deck.antideck.head;
+            deck.antideck.head=null;
+            return;
+        }
+
         Deck newdeck= deck.antideck;
         newdeck.end.next=deck.head;
         if(newdeck.end!=null){
