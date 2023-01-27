@@ -13,5 +13,4 @@ public class FortuneDeck extends Deck {
 
     }
 
-
 }

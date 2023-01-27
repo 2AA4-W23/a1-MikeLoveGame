@@ -35,9 +35,7 @@ public class Deck {
         Node head=this.head;
         this.head=new Node(card);
         this.head.next=head;
-        if(head==end){
-            end=head.next;
-        }
+
         size++;
     }
     public void insertEnd(Card card){
@@ -47,7 +45,6 @@ public class Deck {
             size=1;
             return;
         }
-
         end.next=new Node(card);//bug appears on rare case where end is null, but head is not null
         end = end.next;
         size++;
@@ -137,9 +134,14 @@ public class Deck {
         return ptr.card;
     }
     public static void resetDeck(Deck deck){ //YESSS, IMMAA FUCKING GENIOUSSSSS
+        if(deck.antideck.size==0){
+            return;
+        }
         Deck newdeck= deck.antideck;
         newdeck.end.next=deck.head;
-        newdeck.end=deck.end;
+        if(newdeck.end!=null){
+            newdeck.end=deck.end;
+        }
 
         deck.head=newdeck.head;
         deck.size=deck.size+deck.antideck.size;
