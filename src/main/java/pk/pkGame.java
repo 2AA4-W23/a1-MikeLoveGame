@@ -10,12 +10,12 @@ public class pkGame {
 
     private static final Logger logger= LogManager.getLogger(Player.class.getName());
 
-    private Player SeaFighter;//store whoever was in a sea Battle
     public pkGame(Player[] players, int numGames, boolean traceMode){
 
         int gameCount=0;
         Player.traceMode=traceMode;
         FortuneDeck deck=new FortuneDeck();
+        deck.quickShuffle();
 
         while(gameCount<numGames){
             boolean endround=false;
@@ -26,8 +26,11 @@ public class pkGame {
 
             while(!endround) {
                 for (Player player : players) {
-
-                    normalRound(player);
+                    FortuneCard card=(FortuneCard)deck.deal();
+                    if(card.getFace().equals("Sea_Battle")){
+                        seaBattleRound(player, card);
+                    }
+                    else{normalRound(player);}
                     if (winner(player)) {
                         endround=true;
                         if(traceMode){logger.log(Level.INFO, player.getName()+" Win\n");}
@@ -36,6 +39,7 @@ public class pkGame {
                 }
             }
             gameCount++;
+            Deck.resetDeck(deck);
         }
 
     }

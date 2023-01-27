@@ -1,7 +1,7 @@
 package pk;
 import java.util.*;
 /*deck is implemented as a linked list*/
-public abstract class Deck {
+public class Deck {
     private class Node{
         Card card;
         Node next;
@@ -12,18 +12,37 @@ public abstract class Deck {
     private Node head;
     private int size;
     private Node end;
+
+    private Deck antideck;
+
+    public Deck(){
+        size=0;
+    }
     public Deck(Card head){
         this.head=new Node(head);
         end =this.head;
         size=1;
+        antideck=new Deck();
     }
     public void insertFront(Card card){
+        if (head == null) {
+            this.head=new Node(card);
+            end =this.head;
+            size=1;
+            return;
+        }
         Node head=this.head;
         this.head=new Node(card);
         this.head.next=head;
         size++;
     }
     public void insertEnd(Card card){
+        if(head==null){
+            this.head=new Node(card);
+            end =this.head;
+            size=1;
+            return;
+        }
         end.next=new Node(card);
         end = end.next;
         size++;
@@ -36,6 +55,7 @@ public abstract class Deck {
             end=head;
         }
         size--;
+        antideck.insertEnd(first.card);
         return first.card;
     }
 
@@ -50,12 +70,14 @@ public abstract class Deck {
         end.next=this.head;
         this.head=ptr.next;
         ptr.next=null;
+        end=ptr;
     }
 
     private void cutDeck(Node ptr){
         end.next=this.head;
         this.head=ptr.next;
         ptr.next=null;
+        end=ptr;
     }
 
     private void insertEnd(Node prev, Node ptr){
@@ -84,6 +106,7 @@ public abstract class Deck {
                 ptr=ptr.next;
             }
             insertEnd(prev, ptr);
+            i++;
         }
         cutDeck(cut);
 
@@ -108,5 +131,16 @@ public abstract class Deck {
         }
         return ptr.card;
     }
+    public static void resetDeck(Deck deck){ //YESSS, IMMAA FUCKING GENIOUSSSSS
+        Deck newdeck= deck.antideck;
+        newdeck.end.next=deck.head;
+        newdeck.end=deck.end;
+
+        deck.head=newdeck.head;
+        deck.size=deck.size+deck.antideck.size;
+        deck.end.next=null;
+        deck.antideck=new Deck();
+    }
+
 
 }
