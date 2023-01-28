@@ -54,7 +54,7 @@ public class SmartStrategy implements Strategy{
     public boolean ifEndRound(Card card){
 
         if(stretagy.equals("smart")){//problems to fix
-            int score= pkGame.score(player.getFaces());
+            int score= pkGame.score(player.getFaces(), card);
             try{
                 Integer[] x=DicesToRoll(card);
                 int a=x[1];

@@ -135,7 +135,6 @@ public class Player {
         int i = 0;
 
         while (count < num) {
-
             if (faces[i] != Faces.SKULL) {
                 faces[i]=Dices[i].roll();
                 count++;
@@ -192,6 +191,33 @@ public class Player {
         }
 
         return num;
+    }
+
+    public static Hashtable<Faces, Integer> getFaceCountMB(Faces[] faces) {
+
+        int score = 0;//variables in lambda must be final
+        Hashtable<Faces, Integer> faceList = new Hashtable();
+        Faces[] newFaces=new Faces[faces.length];
+        for (int i = 0; i < faces.length; i++) {
+            if(faces[i]==Faces.PARROT){
+                newFaces[i]=Faces.MONKEY;
+            }
+            else{
+                newFaces[i]=faces[i];
+            }
+        }
+
+        for (Faces face : newFaces) {
+            if (face == Faces.None || face == Faces.SKULL) { //none don't count as face, but to dodge null pointer exception
+                continue;
+            } else if (!faceList.containsKey(face)) {
+                faceList.put(face, 1);
+            } else {
+                faceList.put(face, (faceList.get(face) + 1));
+            }
+        }
+
+        return faceList;
     }
     
 }

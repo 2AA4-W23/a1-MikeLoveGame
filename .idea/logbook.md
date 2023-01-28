@@ -57,5 +57,10 @@ Jan 25th 2023
 Jan 26th 2023
     bug fix on random player logging 
     reconstructing scoring system
-    refractoring 
+    refractoring
+Jan 27th 2023
+    F25-F27 done
+    bug fix regarding to pointers
+Jan 28th 2023
+    F28 done
     

@@ -9,7 +9,6 @@ public class FortuneCard extends Card {
 
 
     private enum Face{Treasure_Chest, Captain, Sorceress, Sea_Battle, Gold, Diamond, Monkey_Bussiness, Skull, nop}
-
     private Face face;
     private int value=0;
     public FortuneCard(){

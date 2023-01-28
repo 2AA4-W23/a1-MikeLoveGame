@@ -7,12 +7,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pk.card.*;
 import pk.dice.*;
-import pk.strategy.*;
 
 
 public class pkGame {
 
     private static final Logger logger= LogManager.getLogger(Player.class.getName());
+    private FortuneCard card;
 
     public pkGame(Player[] players, int numGames, boolean traceMode){
 
@@ -20,7 +20,6 @@ public class pkGame {
         Player.traceMode=traceMode;
         FortuneDeck deck=new FortuneDeck();
         deck.quickShuffle();
-        FortuneCard card;
 
         while(gameCount<numGames){
             boolean endround=false;
@@ -75,7 +74,7 @@ public class pkGame {
         }while (!player.ifEndRound(card));
 
         if (player.getSkullCount() < 3) {
-            score=score(player.getFaces());
+            score=score(player.getFaces(), card);
             player.addScore(score);
         }
         if(Player.traceMode){logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");}
@@ -92,7 +91,7 @@ public class pkGame {
 
         boolean endRound=false;
 
-        while (!endRound) {
+        do{
             player.rollDice(card);
             skullCount=player.getSkullCount();
             if (skullCount >= 3) {
@@ -108,10 +107,10 @@ public class pkGame {
                     break;
                 }
             }
-        }
+        }while (!endRound);
 
         if (player.getSkullCount() < 3) {
-            score=score(player.getFaces());
+            score=score(player.getFaces(), card);
             player.addScore(score);
             player.addScore(reward);
         }
@@ -125,9 +124,29 @@ public class pkGame {
         player.resetDice();
     }
 
-    public static void resetGame(){
+   public static void MonkeyBussinessRound(Player player, FortuneCard card){
+       int skullCount = 0;
 
-    }
+       int score=0;
+
+       do{
+           player.rollDice(card);
+           skullCount=player.getSkullCount();
+           if (skullCount >= 3) {
+               if(Player.traceMode){logger.log(Level.INFO,player.getName()+" ended round bec 3 or more skull\n");}
+               break;
+           }
+       }while (!player.ifEndRound(card));
+
+       if (player.getSkullCount() < 3) {
+           score=score(player.getFaces(), card);
+           player.addScore(score);
+       }
+       if(Player.traceMode){logger.log(Level.INFO, player.getName()+" scored "+score+" points this round\n");}
+       //make sure give back dices
+       player.resetDice();
+   }
+
 
     protected static boolean winner(Player player){
         if(player.getScore()>=6000){
@@ -138,20 +157,27 @@ public class pkGame {
     }
 
 
-    public static int score(Faces faces[]){
+    public static int score(Faces faces[], Card card){
 
         //key is the type, value is the score to the type
 
         Hashtable<Integer, Integer> Rules = new Hashtable<>();
         Rules.put(3,100);//3 of a kind
         Rules.put(4, 200);//4 of a kind
-        Rules.put(5,500);//5 of a kind
+        Rules.put(5, 500);//5 of a kind
         Rules.put(6, 1000);//6 of a kind
         Rules.put(7, 2000);//7 of a kind
         Rules.put(8, 4000);//8 of a kind
 
+
         int score = 0;//variables in lambda must be final
-        Hashtable<Faces, Integer> faceList= Player.getFaceCount(faces);
+        Hashtable<Faces, Integer> faceList;
+        if(card.getFace().equals("Monkey_Bussiness")){
+            faceList=Player.getFaceCountMB(faces);
+        }
+        else{
+            faceList=Player.getFaceCount(faces);
+        }
         int count=0;
         for(Faces k: faceList.keySet()){
             int v=faceList.get(k);

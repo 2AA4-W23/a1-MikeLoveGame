@@ -1,8 +1,5 @@
 package pk.card;
 
-import pk.card.Deck;
-import pk.card.FortuneCard;
-
 public class FortuneDeck extends Deck {
 
     public FortuneDeck(){
@@ -10,8 +7,11 @@ public class FortuneDeck extends Deck {
         for (int i = 0; i <6; i++) {
             this.insertFront(new FortuneCard(3));
         }
-        for (int i = 0; i <28; i++) {
+        for (int i = 0; i <24; i++) {
             this.insertEnd(new FortuneCard());
+        }
+        for (int i = 0; i < 4; i++) {
+            this.insertEnd(new FortuneCard(6));
         }
 
     }
