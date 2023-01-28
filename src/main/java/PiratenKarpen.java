@@ -15,7 +15,7 @@ public class PiratenKarpen {
             numGames= Integer.parseInt(args[0]);
         }
         catch(Exception e){
-            numGames=1;
+            numGames=3;
         }
 
         boolean traceMode=false;

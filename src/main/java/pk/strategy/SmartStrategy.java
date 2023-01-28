@@ -1,7 +1,6 @@
 package pk.strategy;
 import java.util.*;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pk.card.Card;
@@ -87,35 +86,17 @@ public class SmartStrategy implements Strategy{
         Hashtable<Faces, Integer> faceList=new Hashtable();
         LinkedList<Faces> facesNeedRoll= new LinkedList<>();
 
-        if(card.toString().equals("Sea_Battle")){
-            facesNeedRoll=this.SeaBattle();
-            return facesNeedRoll;
+        if(card.getFace().equals("Sea_Battle")){
+            facesNeedRoll=this.SeaBattleRoll();
         }
-
-        for (Faces face: faces) {
-            if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
-                continue;
-            }
-            else if (!faceList.containsKey(face)){
-                faceList.put(face,1);
-            }
-            else{
-                faceList.put(face,(faceList.get(face)+1));
-            }
+        else{
+            facesNeedRoll=this.NormalRoll();
         }
-
-        for (Faces face: faceList.keySet()){
-            if (faceList.get(face)<3){
-                facesNeedRoll.add(face);
-            }
-        }
-
 
         return facesNeedRoll;
-
     }
 
-    private LinkedList<Faces> SeaBattle(){
+    private LinkedList<Faces> SeaBattleRoll(){
         Faces[] faces=player.getFaces();
         Hashtable<Faces, Integer> faceList=new Hashtable();
         LinkedList<Faces> facesNeedRoll= new LinkedList<>();
@@ -137,11 +118,36 @@ public class SmartStrategy implements Strategy{
                 }
         );
 
-        
+
 
         return facesNeedRoll;
     }
 
+    private LinkedList<Faces> NormalRoll(){
+        Faces[] faces=player.getFaces();
+        Hashtable<Faces, Integer> faceList=new Hashtable();
+        LinkedList<Faces> facesNeedRoll= new LinkedList<>();
+
+        for (Faces face: faces) {
+            if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
+                continue;
+            }
+            else if (!faceList.containsKey(face)){
+                faceList.put(face,1);
+            }
+            else{
+                faceList.put(face,(faceList.get(face)+1));
+            }
+        }
+
+        for (Faces face: faceList.keySet()){
+            if (faceList.get(face)<3){
+                facesNeedRoll.add(face);
+            }
+        }
+
+        return facesNeedRoll;
+    }
 
 
 
