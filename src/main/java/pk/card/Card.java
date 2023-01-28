@@ -1,4 +1,4 @@
-package pk;
+package pk.card;
 
 public abstract class Card implements Comparable<Card>{
     private String face;

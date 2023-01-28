@@ -1,4 +1,5 @@
-package pk;
+package pk.card;
+
 import java.util.*;
 /*deck is implemented as a linked list*/
 public class Deck {
@@ -52,7 +53,7 @@ public class Deck {
 
     public Card deal(){
         Card first=head.card;
-        
+
         try{
             head=head.next;
         }

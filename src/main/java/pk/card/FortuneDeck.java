@@ -1,4 +1,7 @@
-package pk;
+package pk.card;
+
+import pk.card.Deck;
+import pk.card.FortuneCard;
 
 public class FortuneDeck extends Deck {
 

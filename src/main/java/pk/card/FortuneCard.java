@@ -1,8 +1,10 @@
-package pk;
+package pk.card;
+
+import pk.card.Card;
 
 import java.util.*;
 
-public class FortuneCard extends Card{
+public class FortuneCard extends Card {
 
 
 

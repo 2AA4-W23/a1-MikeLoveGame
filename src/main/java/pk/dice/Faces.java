@@ -1,5 +1,5 @@
-package pk;
-import java.util.ArrayList;
+package pk.dice;
+
 public enum Faces {
     MONKEY, PARROT, GOLD, DIAMOND, SABER, SKULL, None;
     public static String toString(Faces[] faces){

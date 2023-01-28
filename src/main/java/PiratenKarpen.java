@@ -1,5 +1,6 @@
 import pk.*;
-import java.util.*;
+import pk.Player;
+
 public class PiratenKarpen {
 
     public static void main(String[] args){
@@ -27,7 +28,7 @@ public class PiratenKarpen {
         }
 
 
-        player1=new Player("player1");
+        player1=new Player("player1", "smart");
         player2=new Player("player2");
 
         try{

@@ -5,14 +5,16 @@ import java.util.*;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import pk.card.*;
+import pk.dice.*;
+import pk.strategy.*;
 
 
 public class Player {
 
     private final Dice Dices[] = new Dice[8];
     private Faces faces[] = new Faces[Dices.length];
-    private final Brain brain;
+    private final SmartStrategy smartStrategy;
     private int score = 0;
     public static boolean traceMode=false;
     private int wins=0;
@@ -31,7 +33,7 @@ public class Player {
             faces[i]= Dices[i].roll();
         }
         this.name=name;
-        brain=new Brain(this,Strategy);
+        smartStrategy =new SmartStrategy(this,Strategy);
         this.resetDice();
     }
 
@@ -80,7 +82,7 @@ public class Player {
     }
 
     public String getStrategy() {
-        return brain.getStrategy();
+        return smartStrategy.getStrategy();
     }
 
     public int getSkullCount(){
@@ -119,11 +121,11 @@ public class Player {
         this.wins=0;
     }
 
-    public boolean ifEndRound() {
-        if(brain.ifEndRound()&& traceMode==true){
+    public boolean ifEndRound(Card card) {
+        if(smartStrategy.ifEndRound(card)&& traceMode==true){
             logger.log(Level.INFO, this.name+"decided to end round\n");
         }
-        return brain.ifEndRound();
+        return smartStrategy.ifEndRound(card);
     }
 
 
@@ -137,15 +139,14 @@ public class Player {
             if (faces[i] != Faces.SKULL) {
                 faces[i]=Dices[i].roll();
                 count++;
-
             }
             i++;
         }
 
     }
 
-    private void smartRoll(){
-        Integer[] dicesToRoll=this.brain.DicesToRoll();
+    private void smartRoll(Card card){
+        Integer[] dicesToRoll=this.smartStrategy.DicesToRoll(card);
         int i=0;
         String dicesChosen="dice number:";
 
@@ -161,15 +162,15 @@ public class Player {
         }
     }
 
-    public void rollDice(){
+    public void rollDice(Card card){
         if(traceMode){
             logger.log(Level.INFO, " before rolling the dice, "+this.getName()+" hold following faces"+ Faces.toString(faces)+"\n");
         }
-        if(this.brain.getStrategy()=="dead roll"){
+        if(this.smartStrategy.getStrategy()=="dead roll"){
             this.rollRandomDice();
         }
         else {
-           this.smartRoll();
+           this.smartRoll(card);
         }
         if(traceMode) {
             logger.log(Level.INFO, " after rolling the dice, " + this.getName() + " hold following faces" + Faces.toString(faces) + "\n");
@@ -184,7 +185,7 @@ public class Player {
 
         int num;
 
-        num = player.brain.numDiceToRoll(usableDice);
+        num = player.smartStrategy.numDiceToRoll(usableDice);
 
         if(traceMode){
             logger.log( Level.INFO,"Player "+player.name+" decided to roll " + num+" dices\n");

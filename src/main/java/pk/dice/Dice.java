@@ -1,5 +1,5 @@
-package pk;
-import java.util.Arrays;
+package pk.dice;
+
 import java.util.Random;
 
 public class Dice {

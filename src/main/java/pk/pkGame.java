@@ -5,6 +5,10 @@ import java.util.Hashtable;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import pk.card.*;
+import pk.dice.*;
+import pk.strategy.*;
+
 
 public class pkGame {
 
@@ -41,7 +45,7 @@ public class pkGame {
                         }
                         seaBattleRound(player, card);
                     }
-                    else{normalRound(player);}
+                    else{normalRound(player, card);}
                     if (winner(player)) {
                         endround=true;
                         if(traceMode){logger.log(Level.INFO, player.getName()+" Win\n");}
@@ -55,21 +59,20 @@ public class pkGame {
 
     }
 
-    private static void normalRound(Player player)  {
+    private static void normalRound(Player player, Card card)  {
 
         int skullCount = 0;
-
 
         int score=0;
 
         do{
-            player.rollDice();
+            player.rollDice(card);
             skullCount=player.getSkullCount();
             if (skullCount >= 3) {
                 if(Player.traceMode){logger.log(Level.INFO,player.getName()+" ended round bec 3 or more skull\n");}
                 break;
             }
-        }while (!player.ifEndRound());
+        }while (!player.ifEndRound(card));
 
         if (player.getSkullCount() < 3) {
             score=score(player.getFaces());
@@ -90,7 +93,7 @@ public class pkGame {
         boolean endRound=false;
 
         while (!endRound) {
-            player.rollDice();
+            player.rollDice(card);
             skullCount=player.getSkullCount();
             if (skullCount >= 3) {
                 if(Player.traceMode){logger.log(Level.INFO,player.getName()+" lost sea battle since have 3 skull\n");}
