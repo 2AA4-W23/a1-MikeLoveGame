@@ -41,18 +41,24 @@ public class Deck {
 
     public void quickShuffle(){
         Random r= new Random();
-        int step = r.nextInt(3);
+        int step =r.nextInt(2);
         while(step < cards.size()){
             Card temp = cards.get(step);
             cards.remove(step);
             cards.add(temp);
-            step += 1 + r.nextInt(3);
+            step += 1 + r.nextInt(2);
         }
         for (int i = 0; i < 7; i++){
-            int cut = 2 + r.nextInt(cards.size()) - 4;
+            int cut = 3 + r.nextInt(cards.size())-2;
             if (cut >= 0){
                 cutDeck(cut);
             }
+        }
+    }
+
+    public void longShuffle(){
+        for (int i = 0; i < 10; i++) {
+            quickShuffle();
         }
     }
 

@@ -14,48 +14,20 @@ public class pkGame {
     private static final Logger logger= LogManager.getLogger(Player.class.getName());
     private FortuneCard card;
 
+    private Player[] players;
+
+    private int numGames;
+    public static boolean traceMode;
+    private FortuneDeck deck;
+
     public pkGame(Player[] players, int numGames, boolean traceMode){
 
-        int gameCount=0;
+
         Player.traceMode=traceMode;
-        FortuneDeck deck=new FortuneDeck();
-        deck.quickShuffle();
-
-        while(gameCount<numGames){
-            boolean endround=false;
-
-            for (Player player: players) {
-                player.resetScore();
-            }
-
-            while(!endround) {
-                for (Player player : players) {
-                    if(deck.getHead()!=null) {
-                        card = (FortuneCard) deck.deal();
-                    }
-                    else{
-                        Deck.resetDeck(deck);
-                        card=(FortuneCard) deck.deal();
-                    }
-                    logger.log(Level.INFO, "card Drawn is "+card.getFace());
-                    if(card.getFace().equals("Sea_Battle")){
-                        if(traceMode){
-                            logger.log(Level.INFO,player.getName()+" is in a sea battle");
-                        }
-                        seaBattleRound(player, card);
-                    }
-                    else{normalRound(player, card);}
-                    if (winner(player)) {
-                        endround=true;
-                        if(traceMode){logger.log(Level.INFO, player.getName()+" Win\n");}
-                        break;
-                    }
-                }
-            }
-            gameCount++;
-            Deck.resetDeck(deck);
-        }
-
+        deck=new FortuneDeck();
+        this.players=players;
+        this.numGames=numGames;
+        pkGame.traceMode=traceMode;
     }
 
     private static void normalRound(Player player, Card card)  {
@@ -197,7 +169,46 @@ public class pkGame {
         return score;
     }
 
+    public void run(){
+        int gameCount=0;
+        while(gameCount<numGames){
 
+            boolean endround=false;
+
+            for (Player player: players) {
+                player.resetScore();
+            }
+            Deck.resetDeck(deck);
+            deck.longShuffle();
+            while(!endround) {
+                for (Player player : players) {
+                    if(deck.getHead()!=null) {
+                        card = (FortuneCard) deck.deal();
+                    }
+                    else{
+                        Deck.resetDeck(deck);
+                        deck.quickShuffle();
+                        card=(FortuneCard) deck.deal();
+                    }
+                    if(traceMode){logger.log(Level.INFO, "card Drawn is "+card.getFace());}
+                    if(card.getFace().equals("Sea_Battle")){
+                        if(traceMode){
+                            logger.log(Level.INFO,player.getName()+" is in a sea battle");
+                        }
+                        seaBattleRound(player, card);
+                    }
+                    else{normalRound(player, card);}
+                    if (winner(player)) {
+                        endround=true;
+                        if(traceMode){logger.log(Level.INFO, player.getName()+" Win\n");}
+                        break;
+                    }
+                }
+            }
+            gameCount++;
+            Deck.resetDeck(deck);
+        }
+    }
 
 
 }
