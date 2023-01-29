@@ -1,5 +1,6 @@
 import pk.*;
-import java.util.*;
+import pk.Player;
+
 public class PiratenKarpen {
 
     public static void main(String[] args){
@@ -14,7 +15,7 @@ public class PiratenKarpen {
             numGames= Integer.parseInt(args[0]);
         }
         catch(Exception e){
-            numGames=1;
+            numGames=3000;
         }
 
         boolean traceMode=false;
@@ -41,7 +42,9 @@ public class PiratenKarpen {
 
         Player[] players={player1, player2};
 
-        new pkGame(players, numGames, traceMode);
+        pkGame newgame=new pkGame(players, numGames, traceMode);
+
+        newgame.run();
 
         int player1Wins=player1.getWins();
         int player2Wins=player2.getWins();

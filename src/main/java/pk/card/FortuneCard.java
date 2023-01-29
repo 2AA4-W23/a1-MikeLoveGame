@@ -1,13 +1,14 @@
-package pk;
+package pk.card;
+
+import pk.card.Card;
 
 import java.util.*;
 
-public class FortuneCard extends Card{
+public class FortuneCard extends Card {
 
 
 
     private enum Face{Treasure_Chest, Captain, Sorceress, Sea_Battle, Gold, Diamond, Monkey_Bussiness, Skull, nop}
-
     private Face face;
     private int value=0;
     public FortuneCard(){
