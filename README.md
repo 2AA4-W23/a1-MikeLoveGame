@@ -15,8 +15,8 @@
     * `mvn package`
   * To run the packaged delivery:
     * `java -jar target/piraten-karpen-jar-with-dependencies.jar`
-  * To run 42 games in trace mode:
-    * `mvn exec:java -Dexec.args="'42' 'true'"` (copy and paste to terminal, it does not work here idk why)
+  * To run #ofgames in trace mode:
+    * `mvn exec:java -Dexec.args="'#ofgames' 'true'"` (copy and paste to terminal, it does not work here idk why)
   * To run with player1 with smart stretagy, player2 plays randomly
     * `mvn -q exec:java -Dexec.args="svd"`
 

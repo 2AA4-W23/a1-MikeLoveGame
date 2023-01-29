@@ -84,18 +84,19 @@ public class Deck {
         return cards.get(index);
     }
 
-    public static void resetDeck(Deck Deck){
-        if(Deck.antideck.size() == 0){
+    public static void resetDeck(Deck deck){
+        if(deck.antideck.size() == 0){
             return;
         }
-        if(Deck.cards.size() == 0){
-            Deck.cards = Deck.antideck;
-            Deck.antideck = new ArrayList<Card>();
+        if(deck.cards.size() == 0){
+            deck.cards = deck.antideck;
+            deck.antideck = new ArrayList<Card>();
             return;
         }
-        Deck.antideck.addAll(Deck.cards);
-        Deck.cards = Deck.antideck;
-        Deck.antideck = new ArrayList<Card>();
+        deck.antideck.addAll(deck.cards);
+        deck.cards = deck.antideck;
+        deck.antideck = new ArrayList<Card>();
+
     }
 
 }
