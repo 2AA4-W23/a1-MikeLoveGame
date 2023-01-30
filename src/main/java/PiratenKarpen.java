@@ -14,8 +14,8 @@ public class PiratenKarpen {
         try {
             numGames= Integer.parseInt(args[0]);
         }
-        catch(Exception e){
-            numGames=3000;
+        catch(Exception e){ //default game set to 42
+            numGames=42;
         }
 
         boolean traceMode=false;

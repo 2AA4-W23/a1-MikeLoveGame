@@ -4,9 +4,11 @@ import pk.card.Card;
 
 import java.util.*;
 
+/**
+ * Face in FortuneCard is implemented in enum
+ *
+ */
 public class FortuneCard extends Card {
-
-
 
     private enum Face{Treasure_Chest, Captain, Sorceress, Sea_Battle, Gold, Diamond, Monkey_Bussiness, Skull, nop}
     private Face face;

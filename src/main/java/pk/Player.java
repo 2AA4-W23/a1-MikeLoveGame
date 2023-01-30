@@ -12,8 +12,8 @@ import pk.strategy.*;
 
 public class Player {
 
-    private final Dice Dices[] = new Dice[8];
-    private Faces faces[] = new Faces[Dices.length];
+    private final Dice Dices[] = new Dice[8];//8 dices are implemented here for future development
+    private Faces faces[] = new Faces[Dices.length]; //player rolls Dices and store faces to calculate score
     private final SmartStrategy smartStrategy;
     private int score = 0;
     public static boolean traceMode=false;
@@ -33,7 +33,8 @@ public class Player {
             faces[i]= Dices[i].roll();
         }
         this.name=name;
-        smartStrategy =new SmartStrategy(this,Strategy);
+        smartStrategy =new SmartStrategy(this,Strategy);// if strategy is smart then the brain will be used when making decisions
+        //otherwise, player will make their decision randomly mostly wihtout decision headquarter
         this.resetDice();
     }
 
@@ -58,7 +59,7 @@ public class Player {
     public static Hashtable<Faces, Integer> getFaceCount(Faces[] faces){
 
         int score = 0;//variables in lambda must be final
-        Hashtable<Faces, Integer> faceList=new Hashtable();
+        Hashtable<Faces, Integer> faceList=new Hashtable();//faces are count in hashtable with Face and number of face in integer
 
         for (Faces face: faces) {
             if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception

@@ -12,6 +12,7 @@ import pk.pkGame;
  The Desciption of the method to explain what this object do:
  This object is the decision headquarter for the player where it tells
  the player what to do when the player's strategy is combo driven
+ the cards will be passed around in stretagies to make sure the correct strategy is triggered.
 
  */
 public class SmartStrategy implements Strategy{
@@ -102,7 +103,7 @@ public class SmartStrategy implements Strategy{
         LinkedList<Faces> facesNeedRoll= new LinkedList<>();
 
         for (Faces face: faces) {
-            if(face==Faces.None || face== Faces.SKULL || face==Faces.SABER){ //none don't count as face, but to dodge null pointer exception
+            if(face==Faces.None || face== Faces.SKULL || face==Faces.SABER){ //don't reroll SABER
                 continue;
             }
             else if (!faceList.containsKey(face)){
@@ -129,7 +130,7 @@ public class SmartStrategy implements Strategy{
         LinkedList<Faces> facesNeedRoll= new LinkedList<>();
 
         for (Faces face: faces) {
-            if(face==Faces.None || face== Faces.SKULL){ //none don't count as face, but to dodge null pointer exception
+            if(face==Faces.None || face== Faces.SKULL){ //SKULLs and Nones are not reollable
                 continue;
             }
             else if (!faceList.containsKey(face)){
